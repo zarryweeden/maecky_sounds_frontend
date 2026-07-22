@@ -6,7 +6,13 @@
 
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!BASE_URL) {
+  throw new Error(
+    'VITE_API_BASE_URL is missing. Check your environment variables.'
+  );
+}
 
 // ── Axios Instance ─────────────────────────────────────────────────────────
 const api = axios.create({
