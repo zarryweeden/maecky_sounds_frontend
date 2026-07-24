@@ -73,7 +73,7 @@ export default function RelatedProducts({ products = [], title = 'You Might Also
         }}
       >
         {products.map(product => (
-          <div key={product.id} style={{ minWidth: '220px', flexShrink: 0 }}>
+          <div key={product.id} style={{ width: '220px', flexShrink: 0, height:'360px' }}>
             <ProductCard product={product} />
           </div>
         ))}
