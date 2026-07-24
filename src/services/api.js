@@ -245,9 +245,11 @@ export const productService = {
 
 // ── Category Service ───────────────────────────────────────────────────────
 export const categoryService = {
-  async getAll() {
-    const res = await api.get('/categories/');
-    return res.data;
+  async getAll(params = {}) {
+      const res = await api.get('/categories/', {
+          params,
+      });
+      return res.data;
   },
 
   async getBySlug(slug) {

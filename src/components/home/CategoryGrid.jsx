@@ -39,10 +39,10 @@ export default function CategoryGrid() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    categoryService.getAll()
+    categoryService.getAll({ featured: true })
       .then(data => {
         const list = Array.isArray(data) ? data : data.results || [];
-        setCategories(list.slice(0, 8));
+        setCategories(list);
       })
       .catch(() => setCategories([]))
       .finally(() => setLoading(false));
