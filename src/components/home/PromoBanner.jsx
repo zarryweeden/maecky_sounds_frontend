@@ -121,6 +121,8 @@ export default function PromoBanner() {
             zIndex: 1,
             flexWrap: 'nowrap',
             justifyContent: 'center',
+            width: '100%',
+            overflowX: 'auto',
           }}>
             <TimerBlock value={time.h} label="Hours" />
             <span style={{ fontFamily: FONTS.mono, fontSize: '24px', color: C.amber, fontWeight: 600 }}>:</span>
