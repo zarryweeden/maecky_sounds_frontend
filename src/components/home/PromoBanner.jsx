@@ -113,19 +113,45 @@ export default function PromoBanner() {
             </p>
           </div>
 
-          <div className="timer-block" style={{
-            textAlign: 'center',
-            background: 'rgba(0,0,0,0.4)',
-            border: `1px solid ${C.border}`,
-            borderRadius: '8px',
-            padding: '10px 18px',
-            minWidth: '68px',
-
-          }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              position: 'relative',
+              zIndex: 1,
+              flexWrap: 'nowrap',
+            }}
+          >
             <TimerBlock value={time.h} label="Hours" />
-            <span style={{ fontFamily: FONTS.mono, fontSize: '24px', color: C.amber, fontWeight: 600 }}>:</span>
+
+            <span
+              className="timer-colon"
+              style={{
+                fontFamily: FONTS.mono,
+                fontSize: '24px',
+                fontWeight: 600,
+                color: C.amber,
+              }}
+            >
+              :
+            </span>
+
             <TimerBlock value={time.m} label="Mins" />
-            <span style={{ fontFamily: FONTS.mono, fontSize: '24px', color: C.amber, fontWeight: 600 }}>:</span>
+
+            <span
+              className="timer-colon"
+              style={{
+                fontFamily: FONTS.mono,
+                fontSize: '24px',
+                fontWeight: 600,
+                color: C.amber,
+              }}
+            >
+              :
+            </span>
+
             <TimerBlock value={time.s} label="Secs" />
           </div>
 
