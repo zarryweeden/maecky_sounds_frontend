@@ -150,7 +150,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
       aria-label={`${name} — ${formatPrice(displayPrice)}`}
     >
       {/* Image */}
-      <div style={{ position: 'relative', background: C.surface, aspectRatio: '1', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', background: C.surface, aspectRatio: '1.15', overflow: 'hidden',padding:'18px' }}>
         <img
           src={primaryImage}
           alt={name}
