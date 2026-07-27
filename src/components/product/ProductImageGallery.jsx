@@ -49,7 +49,7 @@ export default function ProductImageGallery({ images = [], productName = '', fal
   };
 
   return (
-    <div style={{ position: 'sticky', top: '80px' }}>
+    <div >
       {/* Main Image */}
       <div
         onMouseEnter={() => setZoomed(true)}
