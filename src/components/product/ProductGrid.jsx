@@ -14,9 +14,49 @@ export default function ProductGrid({
   onClearFilters,
   columns = 4,
 }) {
+  if (loading) {
+    return (
+      <div
+        className={viewMode === 'list' ? '' : 'product-grid'}
+        style={viewMode === 'list' ? getGridStyle(viewMode, columns) : {}}
+      >
+        {Array.from({ length: skeletonCount }, (_, i) => (
+          <SkeletonProductCard key={i} />
+        ))}
+      </div>
+    );
+  }
 
-
-
+  if (!products || products.length === 0) {
+    return (
+      <div style={{
+        textAlign: 'center',
+        padding: '80px 24px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '16px',
+      }}>
+        <div style={{ fontSize: '64px', lineHeight: 1 }}>🎵</div>
+        <h3 style={{
+          fontFamily: FONTS.display,
+          fontWeight: 700,
+          fontSize: '22px',
+          color: C.text,
+        }}>
+          {emptyTitle}
+        </h3>
+        <p style={{ fontSize: '15px', color: C.textMid, maxWidth: '360px', lineHeight: 1.6 }}>
+          {emptyMessage}
+        </p>
+        {onClearFilters && (
+          <Button variant="secondary" size="sm" onClick={onClearFilters}>
+            Clear All Filters
+          </Button>
+        )}
+      </div>
+    );
+  }
 
   return (
   <div
