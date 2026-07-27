@@ -119,7 +119,7 @@ export default function PromoBanner() {
             gap: '10px',
             position: 'relative',
             zIndex: 1,
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
             justifyContent: 'center',
           }}>
             <TimerBlock value={time.h} label="Hours" />
