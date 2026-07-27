@@ -113,16 +113,14 @@ export default function PromoBanner() {
             </p>
           </div>
 
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            position: 'relative',
-            zIndex: 1,
-            flexWrap: 'nowrap',
-            justifyContent: 'center',
-            width: '100%',
-            overflowX: 'auto',
+          <div className="timer-block" style={{
+            textAlign: 'center',
+            background: 'rgba(0,0,0,0.4)',
+            border: `1px solid ${C.border}`,
+            borderRadius: '8px',
+            padding: '10px 18px',
+            minWidth: '68px',
+
           }}>
             <TimerBlock value={time.h} label="Hours" />
             <span style={{ fontFamily: FONTS.mono, fontSize: '24px', color: C.amber, fontWeight: 600 }}>:</span>
