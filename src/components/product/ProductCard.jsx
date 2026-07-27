@@ -166,11 +166,17 @@ export default function ProductCard({ product, variant = 'grid' }) {
 
         {/* Badges */}
         <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          {isNew && <Badge variant="new" />}
-          {isSale && <Badge variant="sale" />}
-          {isHot && <Badge variant="hot" />}
-          {!inStock && <Badge variant="outofstock" />}
-          {inStock && stockCount <= 3 && stockCount > 0 && <Badge variant="lowstock" />}
+          {!inStock ? (
+              <Badge variant="outofstock" />
+          ) : isSale ? (
+              <Badge variant="sale" />
+          ) : isNew ? (
+              <Badge variant="new" />
+          ) : isHot ? (
+              <Badge variant="hot" />
+          ) : stockCount <= 3 ? (
+              <Badge variant="lowstock" />
+          ) : null}
         </div>
 
         {/* Discount tag */}
