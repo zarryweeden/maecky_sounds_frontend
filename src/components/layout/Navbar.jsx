@@ -96,7 +96,7 @@ export default function Navbar() {
           gap: '32px',
         }}>
           {/* Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', flexShrink: 0 }} aria-label="Maecky Sounds home">
+          <Link to="/" style={{     display: 'flex',alignItems: 'center',gap: '10px',textDecoration: 'none',minWidth: 0,flex: 1,}} aria-label="Maecky Sounds home">
             <LogoMark />
             <span style={{
               fontFamily: FONTS.display,
