@@ -6,9 +6,9 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useUIContext } from '../../context/UIContext';
 import { C, FONTS, Z, TRANSITION } from '../../styles/tokens';
 
-function LogoMark() {
+function LogoMark({ className = '' }) {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none">
       <rect width="32" height="32" rx="8" fill={C.amber} fillOpacity="0.15" />
       <path
         d="M8 22V10l8 4 8-4v12"
@@ -96,20 +96,22 @@ export default function Navbar() {
           gap: '32px',
         }}>
           {/* Logo */}
-          <Link to="/" style={{     display: 'flex',alignItems: 'center',gap: '10px',textDecoration: 'none',minWidth: 0,flex: 1,}} aria-label="Maecky Sounds home">
-            <LogoMark />
-            <span className="navbar-logo-text" style={{
-              fontFamily: FONTS.display,
-              fontWeight: 800,
-              fontSize: '18px',
-              color: C.text,
-              letterSpacing: '-0.02em',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}>
-              Maecky <span style={{ color: C.amber }}>Sounds</span>
-            </span>
+          <Link className="navbar-logo" to="/" style={{     display: 'flex',alignItems: 'center',gap: '10px',textDecoration: 'none',minWidth: 0,flex: 1,}} aria-label="Maecky Sounds home">
+            <LogoMark  className="navbar-logo-mark" />
+              <span
+                className="navbar-logo-text"
+                style={{
+                  fontFamily: FONTS.display,
+                  fontWeight: 800,
+                  fontSize: '18px',
+                  color: C.text,
+                  letterSpacing: '-0.02em',
+                  transition: 'all .25s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Maecky <span style={{ color: C.amber }}>Sounds</span>
+              </span>
           </Link>
 
           {/* Desktop Nav Links */}

@@ -400,14 +400,59 @@ body::before {
 }
 
 
+/* ---------------- Logo ---------------- */
+
+.navbar-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* Desktop */
+.navbar-logo-text{
+    display:inline;
+    font-size:18px;
+}
+
+/* Tablet */
+@media (max-width:1100px){
+
+    .navbar-logo-text{
+        font-size:16px !important;
+    }
+
+}
+
+/* Smaller tablets */
+@media (max-width:900px){
+
+    .navbar-logo-text{
+        font-size:15px !important;
+    }
+
+}
+
+/* Phones */
 @media (max-width:768px){
 
-  .navbar-logo-text{
-    font-size:15px !important;
-  }
+    .navbar-logo-text{
+        display:none !important;
+    }
 
-  .navbar-actions{
-    gap:2px !important;
-  }
+}
+
+
+.navbar-logo-mark{
+    width:32px;
+    height:32px;
+    transition:all .25s ease;
+}
+
+@media (max-width:768px){
+
+    .navbar-logo-mark{
+        width:36px;
+        height:36px;
+    }
 
 }
