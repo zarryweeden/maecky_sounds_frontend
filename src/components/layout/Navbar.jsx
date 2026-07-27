@@ -98,12 +98,15 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" style={{     display: 'flex',alignItems: 'center',gap: '10px',textDecoration: 'none',minWidth: 0,flex: 1,}} aria-label="Maecky Sounds home">
             <LogoMark />
-            <span style={{
+            <span className="navbar-logo-text" style={{
               fontFamily: FONTS.display,
               fontWeight: 800,
               fontSize: '18px',
               color: C.text,
               letterSpacing: '-0.02em',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}>
               Maecky <span style={{ color: C.amber }}>Sounds</span>
             </span>
@@ -154,7 +157,14 @@ export default function Navbar() {
           </div>
 
           {/* Action buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '16px' }}>
+          <div   className="navbar-actions"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                marginLeft: '16px',
+                flexShrink: 0,
+              }}>
             {/* Search */}
             <button
               style={iconBtnStyle()}

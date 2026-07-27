@@ -398,3 +398,16 @@ body::before {
   }
 
 }
+
+
+@media (max-width:768px){
+
+  .navbar-logo-text{
+    font-size:15px !important;
+  }
+
+  .navbar-actions{
+    gap:2px !important;
+  }
+
+}
