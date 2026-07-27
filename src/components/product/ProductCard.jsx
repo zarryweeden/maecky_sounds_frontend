@@ -270,20 +270,20 @@ export default function ProductCard({ product, variant = 'grid' }) {
           color: C.amber,
           textTransform: 'uppercase',
           letterSpacing: '0.1em',
-          marginBottom: '5px',
+          marginBottom: '8px',
         }}>
           {brand?.name}
         </div>
 
         <div style={{
           fontFamily: FONTS.display,
-          fontWeight: 600,
-          fontSize: '15px',
+          fontWeight: 700,
+          fontSize: '16px',
           color: C.text,
           marginBottom: '7px',
           lineHeight: 1.3,
         }}>
-          {truncate(name, 55)}
+          {truncate(name, 42)}
         </div>
 
         <StarRating rating={rating} showCount count={reviewCount} style={{ marginBottom: '9px' }} />
@@ -291,8 +291,8 @@ export default function ProductCard({ product, variant = 'grid' }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '7px', flexWrap: 'wrap' }}>
           <span style={{
             fontFamily: FONTS.mono,
-            fontWeight: 600,
-            fontSize: '17px',
+            fontWeight: 700,
+            fontSize: '18px',
             color: salePrice ? C.crimson : C.text,
           }}>
             {formatPrice(displayPrice)}
