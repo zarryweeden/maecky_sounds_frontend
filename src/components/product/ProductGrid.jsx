@@ -78,7 +78,7 @@ function getGridStyle(viewMode, columns) {
   }
   return {
     display: 'grid',
-    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+    gridTemplateColumns: `repeat(auto-fit, minmax(220px, 1fr))`,
     gap: '20px',
   };
 }
