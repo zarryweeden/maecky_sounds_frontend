@@ -23,9 +23,9 @@ export default function LoginPage() {
   );
 
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', background: C.bg }}>
+    <div className="login-page" style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', background: C.bg }}>
       {/* Visual panel */}
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(232,135,26,0.08), rgba(192,57,43,0.04))', borderRight: `1px solid ${C.border}`, overflow: 'hidden' }}>
+      <div  className="login-visual" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(232,135,26,0.08), rgba(192,57,43,0.04))', borderRight: `1px solid ${C.border}`, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(42,42,50,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(42,42,50,0.4) 1px, transparent 1px)`, backgroundSize: '40px 40px', opacity: 0.5 }} />
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '40px' }}>
           <div style={{ fontSize: '80px', marginBottom: '20px', lineHeight: 1 }}>🎸</div>
@@ -37,7 +37,7 @@ export default function LoginPage() {
       </div>
 
       {/* Form panel */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px' }}>
+      <div className="login-form" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px' }}>
         <div style={{ width: '100%', maxWidth: '400px' }}>
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '32px' }}>
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill={C.amber} fillOpacity="0.15"/><path d="M8 22V10l8 4 8-4v12" stroke={C.amber} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="8" cy="22" r="2.5" fill={C.amber}/><circle cx="24" cy="22" r="2.5" fill={C.amber}/></svg>
@@ -96,9 +96,23 @@ export default function LoginPage() {
 
       <style>{`
         @media (max-width: 768px) {
-          div[style*="gridTemplateColumns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-          div[style*="borderRight"] { display: none !important; }
+
+        .login-page {
+          display: block !important;
         }
+
+        .login-visual {
+          display: none !important;
+        }
+
+        .login-form {
+          min-height: 100vh;
+          padding: 32px 24px;
+          justify-content: center;
+          align-items: center;
+        }
+
+      }
       `}</style>
     </div>
   );
