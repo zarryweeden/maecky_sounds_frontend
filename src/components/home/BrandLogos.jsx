@@ -32,7 +32,7 @@ export default function BrandLogos() {
   return (
     <section style={{ paddingTop: 0 }} className="section">
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '24px', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.12em', color: C.textLo, fontWeight: 600, fontFamily: FONTS.body }}>
+        <div style={{ textAlign: 'center', marginBottom: '14px', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.12em', color: C.textLo, fontWeight: 600, fontFamily: FONTS.body }}>
           Trusted Brands
         </div>
         <div style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, padding: '20px 0' }}>
