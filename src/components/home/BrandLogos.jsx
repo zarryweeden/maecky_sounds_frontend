@@ -30,7 +30,7 @@ export default function BrandLogos() {
   if (!brands.length) return null;
 
   return (
-    <section style={{ paddingTop: 0, paddingBottom:'24px'}} className="section">
+    <section style={{ paddingTop: 0, paddingBottom:'10px'}} className="section">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '24px', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.12em', color: C.textLo, fontWeight: 600, fontFamily: FONTS.body }}>
           Trusted Brands
