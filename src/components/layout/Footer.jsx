@@ -269,8 +269,8 @@ export default function Footer() {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '4px',
-                marginTop: '6px',
+                gap: '8px',
+                marginTop: '10px',
               }}
             >
               <a
