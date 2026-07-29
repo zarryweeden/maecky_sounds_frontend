@@ -7,7 +7,8 @@ import {
   SiFacebook,
   SiInstagram,
   SiTiktok,
-  SiYoutube
+  SiYoutube,
+  SiX
 } from "react-icons/si";
 
 const SHOP_LINKS = [
