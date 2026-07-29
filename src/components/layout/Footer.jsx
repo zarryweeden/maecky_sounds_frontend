@@ -246,18 +246,7 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h4 style={{
-              fontFamily: FONTS.display,
-              fontWeight: 700,
-              fontSize: '13px',
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-              color: C.textMid,
-              marginBottom: '16px',
-            }}>
-              Support
-            </h4>
-            {SUPPORT_LINKS.map(l => <FooterLink key={l.href} href={l.href}>{l.label}</FooterLink>)}
+
 
             <div style={{
               marginTop: '20px',
