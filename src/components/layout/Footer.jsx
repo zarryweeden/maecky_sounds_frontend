@@ -6,7 +6,7 @@ import { useUIContext } from '../../context/UIContext';
 import {
   SiFacebook,
   SiInstagram,
-  SiX,
+  SiTiktok,
   SiYoutube
 } from "react-icons/si";
 
@@ -34,20 +34,21 @@ const socials = [
   {
     icon: <SiFacebook size={16} />,
     label: "Facebook",
-    href: "Facebook"
+    href: "https://web.facebook.com/emmanuel.inganga"
   },
   {
     icon: <SiInstagram size={16} />,
     label: "Instagram",
-    href: "Instagram"
+    href: "https://www.instagram.com/maeckysounds/"
   },
   {
     icon: <SiX size={16} />,
     label: "X"
   },
   {
-    icon: <SiYoutube size={16} />,
-    label: "YouTube"
+    icon: <SiTiktok size={16} />,
+    label: "Tiktok",
+    href:"https://www.tiktok.com/@maeckysoundskisumu"
   }
 ];
 
