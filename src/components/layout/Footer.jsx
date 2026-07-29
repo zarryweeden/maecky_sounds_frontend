@@ -265,12 +265,38 @@ export default function Footer() {
               borderRadius: '8px',
             }}>
               <div style={{ fontSize: '12px', color: C.textMid, marginBottom: '4px' }}>Mon – Sat 9am – 7pm</div>
-              <a href="tel:+254721903906" style={{ fontSize: '14px', fontWeight: 600, color: C.amber, textDecoration: 'none' }}>
+             <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                marginTop: '6px',
+              }}
+            >
+              <a
+                href="tel:+254721903906"
+                style={{
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: C.amber,
+                  textDecoration: 'none',
+                }}
+              >
                 +254 721 903 906
               </a>
-              <a href="tel:+254701210797" style={{ fontSize: '14px', fontWeight: 600, color: C.amber, textDecoration: 'none' }}>
+
+              <a
+                href="tel:+254701210797"
+                style={{
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: C.amber,
+                  textDecoration: 'none',
+                }}
+              >
                 +254 701 210 797
               </a>
+            </div>
             </div>
           </div>
         </div>
