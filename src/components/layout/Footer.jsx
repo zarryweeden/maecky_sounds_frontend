@@ -265,8 +265,11 @@ export default function Footer() {
               borderRadius: '8px',
             }}>
               <div style={{ fontSize: '12px', color: C.textMid, marginBottom: '4px' }}>Mon – Sat 9am – 7pm</div>
-              <a href="tel:+254700123456" style={{ fontSize: '14px', fontWeight: 600, color: C.amber, textDecoration: 'none' }}>
-                +254 700 123 456
+              <a href="tel:+254721903906" style={{ fontSize: '14px', fontWeight: 600, color: C.amber, textDecoration: 'none' }}>
+                +254 721 903 906
+              </a>
+              <a href="tel:+254701210797" style={{ fontSize: '14px', fontWeight: 600, color: C.amber, textDecoration: 'none' }}>
+                +254 701 210 797
               </a>
             </div>
           </div>
@@ -283,7 +286,7 @@ export default function Footer() {
           gap: '12px',
         }}>
           <span style={{ fontSize: '13px', color: C.textLo }}>
-            © 2026 Maecky Sounds Ltd. All rights reserved. Nairobi, Kenya.
+            © 2026 Maecky Sounds Ltd. All rights reserved. Kisumu, Kenya.
           </span>
 
         </div>
