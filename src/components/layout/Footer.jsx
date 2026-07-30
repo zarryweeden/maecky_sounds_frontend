@@ -113,12 +113,18 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '16px' }}>
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="8" fill={C.amber} fillOpacity="0.15" />
-                <path d="M8 22V10l8 4 8-4v12" stroke={C.amber} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="8" cy="22" r="2.5" fill={C.amber} />
-                <circle cx="24" cy="22" r="2.5" fill={C.amber} />
-              </svg>
+            <img
+              src="/logo-crop-removebg-preview.png"
+              alt="Maecky Sounds — A Complete Tune"
+              style={{
+                height: '46px',
+                width: 'auto',
+                objectFit: 'contain',
+                background: '#fff',
+                borderRadius: '8px',
+                padding: '4px 10px',
+              }}
+            />
               <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>
                 Maecky <span style={{ color: C.amber }}>Sounds</span>
               </span>
