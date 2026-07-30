@@ -86,8 +86,8 @@ export default function HeroBanner() {
               color: C.text,
               marginBottom: '22px',
             }}>
-              Where Music<br />
-              <span style={{ color: C.amber }}>Comes Alive</span>
+              A<br />
+              <span style={{ color: C.amber }}>Complete Tune</span>
             </h1>
 
             <p style={{
