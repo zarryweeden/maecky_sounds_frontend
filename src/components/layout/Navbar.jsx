@@ -6,11 +6,28 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useUIContext } from '../../context/UIContext';
 import { C, FONTS, Z, TRANSITION } from '../../styles/tokens';
 
+function LogoMark({ className = '' }) {
+  return (
+    <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <rect width="32" height="32" rx="8" fill={C.amber} fillOpacity="0.15" />
+      <path
+        d="M8 22V10l8 4 8-4v12"
+        stroke={C.amber}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="8" cy="22" r="2.5" fill={C.amber} />
+      <circle cx="24" cy="22" r="2.5" fill={C.amber} />
+    </svg>
+  );
+}
+
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Shop', href: '/category/guitars' },
   { label: 'Deals', href: '/category/guitars?sale=true' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
   { label: 'About', href: '/about' },
 ];
 
@@ -46,18 +63,18 @@ export default function Navbar() {
     alignItems: 'center',
     padding: '0 32px',
     transition: 'all 0.3s ease',
-    background: scrolled ? 'rgba(10,10,11,0.96)' : 'transparent',
+    background: scrolled ? 'rgba(17,17,19,0.92)' : 'transparent',
     backdropFilter: scrolled ? 'blur(16px)' : 'none',
-    borderBottom: scrolled ? `1px solid rgba(26,26,232,0.2)` : '1px solid transparent',
+    borderBottom: scrolled ? `1px solid ${C.border}` : '1px solid transparent',
   };
 
-  const iconBtnStyle = {
+  const iconBtnStyle = (active = false) => ({
     width: '38px',
     height: '38px',
     borderRadius: '8px',
     border: 'none',
-    background: 'transparent',
-    color: C.textMid,
+    background: active ? C.amberLo : 'transparent',
+    color: active ? C.amber : C.textMid,
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
@@ -65,7 +82,7 @@ export default function Navbar() {
     transition: TRANSITION.fast,
     position: 'relative',
     flexShrink: 0,
-  };
+  });
 
   return (
     <>
@@ -78,39 +95,38 @@ export default function Navbar() {
           alignItems: 'center',
           gap: '32px',
         }}>
-
-          {/* ── Real Logo ──────────────────────────────────────── */}
-          <Link
-            to="/"
+          {/* Logo */}
+        <Link
+          to="/"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            textDecoration: 'none',
+            flexShrink: 0,
+          }}
+          aria-label="Maecky Sounds home"
+        >
+          <img
+            src="/logo-crop.jpeg"
+            alt="Maecky Sounds — A Complete Tune"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-              flexShrink: 0,
+              height: '46px',
+              width: 'auto',
+              objectFit: 'contain',
+              background: '#fff',
+              borderRadius: '8px',
+              padding: '4px 10px',
             }}
-            aria-label="Maecky Sounds home"
-          >
-            <img
-              src="/logo.jpeg"
-              alt="Maecky Sounds"
-              style={{
-                height: '46px',
-                width: 'auto',
-                objectFit: 'contain',
-                // White background pill so the logo
-                // is always readable on the dark navbar
-                background: '#fff',
-                borderRadius: '8px',
-                padding: '4px 10px',
-              }}
-            />
-          </Link>
+          />
+        </Link>
 
-          {/* ── Desktop Nav Links ───────────────────────────────── */}
-          <div
-            style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: 'auto' }}
-            className="desktop-nav"
-          >
+          {/* Desktop Nav Links */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            marginLeft: 'auto',
+          }} className="desktop-nav">
             {NAV_LINKS.map(link => {
               const isActive = location.pathname === link.href;
               return (
@@ -121,18 +137,18 @@ export default function Navbar() {
                     fontSize: '14px',
                     fontWeight: 500,
                     fontFamily: FONTS.body,
-                    color: isActive ? '#fff' : C.textMid,
+                    color: isActive ? C.text : C.textMid,
                     padding: '8px 12px',
                     borderRadius: '6px',
                     textDecoration: 'none',
                     transition: TRANSITION.fast,
-                    background: isActive ? 'rgba(26,26,232,0.15)' : 'transparent',
+                    background: isActive ? 'rgba(255,255,255,0.05)' : 'transparent',
                     whiteSpace: 'nowrap',
                   }}
                   onMouseEnter={e => {
                     if (!isActive) {
-                      e.currentTarget.style.color = '#fff';
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                      e.currentTarget.style.color = C.text;
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
                     }
                   }}
                   onMouseLeave={e => {
@@ -148,15 +164,21 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* ── Action Buttons ──────────────────────────────────── */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '16px' }}>
-
+          {/* Action buttons */}
+          <div   className="navbar-actions"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                marginLeft: '16px',
+                flexShrink: 0,
+              }}>
             {/* Search */}
             <button
-              style={iconBtnStyle}
+              style={iconBtnStyle()}
               onClick={openSearch}
               aria-label="Open search"
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = '#fff'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.text; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
             >
               <svg width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -166,10 +188,10 @@ export default function Navbar() {
 
             {/* Wishlist */}
             <button
-              style={{ ...iconBtnStyle, position: 'relative' }}
+              style={iconBtnStyle()}
               onClick={() => navigate('/wishlist')}
               aria-label={`Wishlist (${wishCount} items)`}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = '#fff'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.text; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
             >
               <svg width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -178,13 +200,18 @@ export default function Navbar() {
               {wishCount > 0 && (
                 <span style={{
                   position: 'absolute',
-                  top: '4px', right: '4px',
-                  width: '16px', height: '16px',
-                  background: '#E81A1A',
-                  color: '#fff',
-                  fontSize: '10px', fontWeight: 700,
+                  top: '4px',
+                  right: '4px',
+                  width: '16px',
+                  height: '16px',
+                  background: C.amber,
+                  color: '#000',
+                  fontSize: '10px',
+                  fontWeight: 700,
                   borderRadius: '50%',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   fontFamily: FONTS.body,
                 }}>
                   {wishCount > 9 ? '9+' : wishCount}
@@ -194,39 +221,43 @@ export default function Navbar() {
 
             {/* Account */}
             <button
-              style={iconBtnStyle}
+              style={iconBtnStyle()}
               onClick={() => navigate(isAuthenticated ? '/account' : '/login')}
-              aria-label={isAuthenticated ? `My account` : 'Sign in'}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = '#fff'; }}
+              aria-label={isAuthenticated ? `My account (${user?.name})` : 'Sign in'}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.text; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
             >
               {isAuthenticated && user ? (
                 <div style={{
-                  width: '28px', height: '28px',
+                  width: '28px',
+                  height: '28px',
                   borderRadius: '50%',
-                  background: 'rgba(26,26,232,0.2)',
-                  border: `1.5px solid rgba(26,26,232,0.5)`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: FONTS.display, fontWeight: 700,
-                  fontSize: '11px', color: '#6b6bff',
+                  background: C.amberLo,
+                  border: `1.5px solid rgba(232,135,26,0.4)`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: FONTS.display,
+                  fontWeight: 700,
+                  fontSize: '11px',
+                  color: C.amber,
                 }}>
-                  {user.full_name?.[0]?.toUpperCase() || 'U'}
+                  {user.name?.[0]?.toUpperCase() || 'U'}
                 </div>
               ) : (
                 <svg width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
                 </svg>
               )}
             </button>
 
-            {/* Cart button — blue to match logo */}
+            {/* Cart */}
             <button
               onClick={openCart}
               aria-label={`Shopping cart (${itemCount} items)`}
               style={{
-                background: '#1A1AE8',
-                color: '#fff',
+                background: C.amber,
+                color: '#000',
                 padding: '8px 16px',
                 borderRadius: '8px',
                 border: 'none',
@@ -238,19 +269,18 @@ export default function Navbar() {
                 alignItems: 'center',
                 gap: '8px',
                 transition: TRANSITION.fast,
+                position: 'relative',
               }}
-              onMouseEnter={e => e.currentTarget.style.background = '#3333ff'}
-              onMouseLeave={e => e.currentTarget.style.background = '#1A1AE8'}
+              onMouseEnter={e => { e.currentTarget.style.background = C.amberHi; }}
+              onMouseLeave={e => { e.currentTarget.style.background = C.amber; }}
             >
               <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 01-8 0" />
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 01-8 0" />
               </svg>
               Cart
               {itemCount > 0 && (
                 <span style={{
-                  background: 'rgba(255,255,255,0.25)',
+                  background: 'rgba(0,0,0,0.25)',
                   borderRadius: '99px',
                   padding: '1px 7px',
                   fontSize: '12px',
@@ -263,7 +293,7 @@ export default function Navbar() {
 
             {/* Mobile hamburger */}
             <button
-              style={{ ...iconBtnStyle, display: 'none' }}
+              style={{ ...iconBtnStyle(), display: 'none' }}
               onClick={() => setMobileOpen(v => !v)}
               aria-label="Toggle mobile menu"
               className="mobile-menu-btn"
@@ -285,9 +315,11 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div style={{
         position: 'fixed',
-        top: '64px', left: 0, right: 0,
-        background: 'rgba(10,10,11,0.98)',
-        borderBottom: `1px solid rgba(26,26,232,0.2)`,
+        top: '64px',
+        left: 0,
+        right: 0,
+        background: C.surface,
+        borderBottom: `1px solid ${C.border}`,
         zIndex: Z.nav - 1,
         transform: mobileOpen ? 'translateY(0)' : 'translateY(-100%)',
         opacity: mobileOpen ? 1 : 0,
@@ -305,7 +337,7 @@ export default function Navbar() {
               fontFamily: FONTS.body,
               fontSize: '16px',
               fontWeight: 500,
-              color: location.pathname === link.href ? '#1A1AE8' : C.textMid,
+              color: location.pathname === link.href ? C.amber : C.textMid,
               textDecoration: 'none',
               borderBottom: `1px solid ${C.border}`,
             }}
