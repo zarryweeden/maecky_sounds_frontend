@@ -256,7 +256,7 @@ export default function Footer() {
               border: `1px solid ${C.border}`,
               borderRadius: '8px',
             }}>
-              <div style={{ fontSize: '12px', color: C.textMid, marginBottom: '4px' }}>Mon – Sat 9am – 7pm</div>
+              <div style={{ fontSize: '12px', color: C.textMid, marginBottom: '4px' }}>Mon – Sat 8am – 6pm</div>
              <div
               style={{
                 display: 'flex',
