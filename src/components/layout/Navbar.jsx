@@ -107,7 +107,7 @@ export default function Navbar() {
           aria-label="Maecky Sounds home"
         >
           <img
-            src="/logo-crop-removebg-preview.png"
+            src="/logo-crop1.jpeg"
             alt="Maecky Sounds — A Complete Tune"
             style={{
               height: '46px',
