@@ -117,9 +117,7 @@ export default function Footer() {
                 height: '46px',
                 width: 'auto',
                 objectFit: 'contain',
-                background: '#fff',
-                borderRadius: '8px',
-                padding: '4px 10px',
+
               }}
             />
               <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>

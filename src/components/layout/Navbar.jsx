@@ -113,9 +113,7 @@ export default function Navbar() {
               height: '46px',
               width: 'auto',
               objectFit: 'contain',
-              background: '#fff',
-              borderRadius: '8px',
-              padding: '4px 10px',
+
             }}
           />
         </Link>
