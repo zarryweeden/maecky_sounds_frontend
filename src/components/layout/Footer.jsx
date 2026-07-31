@@ -26,10 +26,7 @@ const COMPANY_LINKS = [
 
 ];
 
-const SUPPORT_LINKS = [
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Track Order', href: '/account/orders' },
-];
+
 
 const socials = [
   {
@@ -114,7 +111,7 @@ export default function Footer() {
           <div>
             <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '16px' }}>
             <img
-              src="/logo-crop-removebg-preview.png"
+              src="/logo-transparent.png"
               alt="Maecky Sounds — A Complete Tune"
               style={{
                 height: '46px',
