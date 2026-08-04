@@ -152,7 +152,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
       aria-label={`${name} — ${formatPrice(displayPrice)}`}
     >
       {/* Image */}
-      <div style={{ position: 'relative', background:'rgba(255,255,255,0.98)', aspectRatio: '1.15', overflow: 'hidden',padding:'18px' }}>
+      <div style={{ position: 'relative', background:'#FAFAFA', aspectRatio: '1', overflow: 'hidden',padding:'12px',display:'flex',alignItems:'center',justifyContent:'center' }}>
         <img
           src={primaryImage}
           alt={name}
@@ -162,7 +162,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
             height: '100%',
             objectFit: 'contain',
             transition: 'transform 0.35s ease',
-            transform: hovered ? 'scale(1.04)' : 'scale(1)',
+            transform: hovered ? 'scale(1.08)' : 'scale(1)',
           }}
         />
 
@@ -219,6 +219,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
             boxShadow: "0 4px 10px rgba(0,0,0,.08)",
             color: inWish ? "#EF4444" : "#6B7280",
             transition: TRANSITION.fast,
+            opacity: 1
 
           }}
           onMouseEnter={e => e.currentTarget.style.background="#fff"}
