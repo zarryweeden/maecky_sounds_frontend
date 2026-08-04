@@ -255,20 +255,19 @@ export default function Navbar() {
               onClick={openCart}
               aria-label={`Shopping cart (${itemCount} items)`}
               style={{
-                background: C.amber,
-                color: '#000',
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                fontWeight: 700,
-                fontSize: '14px',
-                fontFamily: FONTS.body,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                transition: TRANSITION.fast,
-                position: 'relative',
+                  background: C.amber,
+                  color: '#000',
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  fontFamily: FONTS.body,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: TRANSITION.fast,
               }}
               onMouseEnter={e => { e.currentTarget.style.background = C.amberHi; }}
               onMouseLeave={e => { e.currentTarget.style.background = C.amber; }}
