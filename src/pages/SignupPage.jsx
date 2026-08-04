@@ -36,10 +36,21 @@ export default function SignupPage() {
       {/* Form */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px' }}>
         <div style={{ width: '100%', maxWidth: '400px' }}>
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '32px' }}>
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill={C.amber} fillOpacity="0.15"/><path d="M8 22V10l8 4 8-4v12" stroke={C.amber} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="8" cy="22" r="2.5" fill={C.amber}/><circle cx="24" cy="22" r="2.5" fill={C.amber}/></svg>
-            <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '18px', color: C.text }}>Maecky <span style={{ color: C.amber }}>Sounds</span></span>
-          </Link>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '16px' }}>
+            <img
+              src="/logo-transparent.png"
+              alt="Maecky Sounds — A Complete Tune"
+              style={{
+                height: '46px',
+                width: 'auto',
+                objectFit: 'contain',
+
+              }}
+            />
+              <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>
+                Maecky <span style={{ color: C.amber }}>Sounds</span>
+              </span>
+            </Link>
 
           <h1 style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '28px', letterSpacing: '-0.02em', marginBottom: '6px', color: C.text }}>Create Account</h1>
           <p style={{ fontSize: '15px', color: C.textMid, marginBottom: '28px' }}>Start your musical journey today</p>
