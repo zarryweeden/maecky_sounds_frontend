@@ -208,7 +208,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
             width: '32px',
             height: '32px',
             borderRadius: '8px',
-            background: 'rgba(10,10,11,0.7)',
+            background: 'rgba(255,255,255,0.98)',
             border: `1px solid ${inWish ? 'rgba(239,68,68,0.4)' : C.border}`,
             display: 'flex',
             alignItems: 'center',
