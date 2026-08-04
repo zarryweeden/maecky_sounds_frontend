@@ -219,10 +219,10 @@ export default function ProductCard({ product, variant = 'grid' }) {
             boxShadow: "0 4px 10px rgba(0,0,0,.08)",
             color: inWish ? "#EF4444" : "#6B7280",
             transition: TRANSITION.fast,
-            opacity: hovered || inWish ? 1 : 0,
+
           }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(10,10,11,0.9)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,10,11,0.7)'}
+          onMouseEnter={e => e.currentTarget.style.background="#fff"}
+          onMouseLeave={e => e.currentTarget.style.color=C.amber}
         >
           <svg width="15" height="14" fill={inWish ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
