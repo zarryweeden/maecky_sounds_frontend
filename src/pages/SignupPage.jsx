@@ -102,8 +102,15 @@ export default function SignupPage() {
 
       <style>{`
         @media (max-width: 768px) {
-          div[style*="gridTemplateColumns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-          div[style*="borderRight"] { display: none !important; }
+          div[style*="justifyContent: 'center'"] {
+            padding: 24px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          div[style*="justifyContent: 'center'"] {
+            padding: 16px !important;
+          }
         }
       `}</style>
     </div>

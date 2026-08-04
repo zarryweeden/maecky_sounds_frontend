@@ -96,23 +96,16 @@ export default function LoginPage() {
 
       <style>{`
         @media (max-width: 768px) {
-
-        .login-page {
-          display: block !important;
+          div[style*="justifyContent: 'center'"] {
+            padding: 24px !important;
+          }
         }
 
-        .login-visual {
-          display: none !important;
+        @media (max-width: 480px) {
+          div[style*="justifyContent: 'center'"] {
+            padding: 16px !important;
+          }
         }
-
-        .login-form {
-          min-height: 100vh;
-          padding: 32px 24px;
-          justify-content: center;
-          align-items: center;
-        }
-
-      }
       `}</style>
     </div>
   );
