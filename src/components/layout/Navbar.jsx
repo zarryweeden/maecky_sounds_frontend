@@ -316,7 +316,7 @@ export default function Navbar() {
         top: '64px',
         left: 0,
         right: 0,
-        background: C.surface,
+        background: 'rgba(255,255,255,0.98)',
         borderBottom: `1px solid ${C.border}`,
         zIndex: Z.nav - 1,
         transform: mobileOpen ? 'translateY(0)' : 'translateY(-100%)',

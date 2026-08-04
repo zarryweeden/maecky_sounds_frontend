@@ -23,24 +23,24 @@ export default function HeroBanner() {
     }}>
       {/* Ambient radial glow */}
       <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'radial-gradient(ellipse 60% 70% at 70% 50%, rgba(232,135,26,0.08) 0%, transparent 70%)',
-        pointerEvents: 'none',
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 60% 70% at 70% 50%, rgba(232,135,26,0.06) 0%, transparent 70%)',
+          pointerEvents: 'none',
       }} />
 
       {/* Grid background */}
       <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: `
-          linear-gradient(rgba(42,42,50,0.4) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(42,42,50,0.4) 1px, transparent 1px)
-        `,
-        backgroundSize: '56px 56px',
-        maskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent)',
-        WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent)',
-        pointerEvents: 'none',
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `
+              linear-gradient(rgba(0,0,80,0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0,0,80,0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: '56px 56px',
+            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent)',
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent)',
+            pointerEvents: 'none',
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
