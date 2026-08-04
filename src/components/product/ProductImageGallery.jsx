@@ -76,7 +76,7 @@ export default function ProductImageGallery({ images = [], productName = '', fal
             padding: '20px',
             transition: zoomed ? 'none' : TRANSITION.mid,
             transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
-            transform: zoomed ? 'scale(1.8)' : 'scale(1)',
+            transform: zoomed ? 'scale(1.08)' : 'scale(1)',
           }}
         />
 
