@@ -95,7 +95,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
               height: '120px',
               objectFit: 'cover',
               transition: 'transform 0.35s ease',
-              transform: hovered ? 'scale(1.04)' : 'scale(1)',
+              transform: hovered ? 'scale(1.08)' : 'scale(1)',
             }}
           />
         </div>
