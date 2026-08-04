@@ -1,13 +1,13 @@
 export const C = {
   // ── Backgrounds (darkest → lightest) ─────────────────────────────────────
-  bg:        '#0A0A0B',
-  surface:   '#111113',
-  card:      '#18181C',
-  cardHi:    '#1F1F25',
+  bg:        '#FFFFFF',
+  surface:   '#F8F8FA',
+  card:      '#FFFFFF',
+  cardHi:    '#F0F0F5',
 
   // ── Borders ───────────────────────────────────────────────────────────────
-  border:    '#2A2A32',
-  borderHi:  '#3D3D4A',
+  border:    '#E2E2E8',
+  borderHi:  '#C8C8D2',
 
   // ── Brand — Electric Amber (primary) ─────────────────────────────────────
   amber:     '#E8871A',
@@ -24,9 +24,9 @@ export const C = {
   blueLo:    'rgba(59,130,246,0.12)',
 
   // ── Text hierarchy ────────────────────────────────────────────────────────
-  text:      '#F0EEE8',
-  textMid:   '#A09B8C',
-  textLo:    '#5C5650',
+  text:      '#111113',
+  textMid:   '#555560',
+  textLo:    '#9090A0',
 
   // ── Semantic states ───────────────────────────────────────────────────────
   success:   '#22C55E',
