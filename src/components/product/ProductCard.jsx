@@ -71,14 +71,16 @@ export default function ProductCard({ product, variant = 'grid' }) {
         style={{
           display: 'flex',
           gap: '20px',
-          background: C.card,
-          border: `1px solid ${hovered ? 'rgba(232,135,26,0.3)' : C.border}`,
+          background: '#fff',,
+          border: `1px solid ${hovered ? '#D9D9D9' : '#ECECEC'}`,
           borderRadius: '12px',
           overflow: 'hidden',
           cursor: 'pointer',
           transition: TRANSITION.mid,
-          transform: hovered ? 'translateY(-1px)' : 'translateY(0)',
-          boxShadow: hovered ? SHADOW.cardHover : SHADOW.card,
+          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+          boxShadow: hovered
+          ? '0 12px 30px rgba(0,0,0,.12)'
+          : '0 2px 8px rgba(0,0,0,.05)',
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
