@@ -63,9 +63,10 @@ export default function Navbar() {
     alignItems: 'center',
     padding: '0 32px',
     transition: 'all 0.3s ease',
-    background: scrolled ? 'rgba(17,17,19,0.92)' : 'transparent',
-    backdropFilter: scrolled ? 'blur(16px)' : 'none',
-    borderBottom: scrolled ? `1px solid ${C.border}` : '1px solid transparent',
+    background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
+    backdropFilter: 'blur(16px)',
+    borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
+    boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
   };
 
   const iconBtnStyle = (active = false) => ({
