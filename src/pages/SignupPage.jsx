@@ -32,8 +32,26 @@ export default function SignupPage() {
   return (
     <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', background: C.bg }}>
       {/* Visual */}
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(232,135,26,0.08), rgba(192,57,43,0.04))', borderRight: `1px solid ${C.border}`, overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(42,42,50,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(42,42,50,0.4) 1px, transparent 1px)`, backgroundSize: '40px 40px', opacity: 0.5 }} />
+      {/* Visual panel */}
+      <div style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, rgba(232,135,26,0.08), rgba(26,26,232,0.05))',
+        borderRight: `1px solid ${C.border}`,
+        overflow: 'hidden',
+      }}>
+        {/* Grid pattern — subtle on white */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+        }} />
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '40px' }}>
           <div style={{ fontSize: '80px', marginBottom: '20px', lineHeight: 1 }}>🎹</div>
           <h2 style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '28px', letterSpacing: '-0.02em', marginBottom: '8px' }}>
