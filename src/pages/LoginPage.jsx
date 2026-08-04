@@ -23,7 +23,7 @@ export default function LoginPage() {
   );
 
   return (
-    <div className="login-page" style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', background: C.bg }}>
+    <div className="login-page" style={{ minHeight: '100vh', background: C.bg }}>
 
 
       {/* Form panel */}
