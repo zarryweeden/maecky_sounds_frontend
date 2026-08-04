@@ -30,7 +30,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: C.bg }}>
+    <div >
       {/* Visual */}
 
       {/* Form */}
