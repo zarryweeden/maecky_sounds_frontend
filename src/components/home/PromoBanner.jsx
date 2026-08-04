@@ -62,17 +62,17 @@ export default function PromoBanner() {
     <section style={{ paddingTop: 0 }} className="section">
       <div className="container">
         <div style={{
-          background: 'linear-gradient(135deg, rgba(192,57,43,0.18) 0%, rgba(232,135,26,0.18) 100%)',
-          border: `1px solid rgba(232,135,26,0.25)`,
-          borderRadius: '16px',
-          padding: '40px 48px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '32px',
-          flexWrap: 'wrap',
-          position: 'relative',
-          overflow: 'hidden',
+            background: 'linear-gradient(135deg, rgba(232,135,26,0.08) 0%, rgba(192,57,43,0.06) 100%)',
+            border: `1px solid rgba(232,135,26,0.2)`,
+            borderRadius: '16px',
+            padding: '40px 48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '32px',
+            flexWrap: 'wrap',
+            position: 'relative',
+            overflow: 'hidden',
         }}>
           {/* Background glow */}
           <div style={{
