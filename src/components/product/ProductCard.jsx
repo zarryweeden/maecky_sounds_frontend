@@ -71,7 +71,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
         style={{
           display: 'flex',
           gap: '20px',
-          background: '#fff',,
+          background: '#fff',
           border: `1px solid ${hovered ? '#D9D9D9' : '#ECECEC'}`,
           borderRadius: '12px',
           overflow: 'hidden',
