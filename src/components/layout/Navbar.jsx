@@ -417,12 +417,15 @@ export default function Navbar() {
           onClick={() => setMobileOpen(false)}
           style={{
             position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,.45)",
-            opacity: mobileOpen ? 1 : 0,
-            pointerEvents: mobileOpen ? "all" : "none",
-            transition: "opacity .3s ease",
-            zIndex: Z.nav - 1,
+            top: 0,
+            left: mobileOpen ? 0 : "-340px",
+            width: "320px",
+            height: "100vh",
+            background: "#fff",
+            zIndex: Z.nav + 20,
+            transition: "left .3s ease",
+            boxShadow: "10px 0 40px rgba(0,0,0,.18)",
+            overflowY: "auto",
           }}
         />
 
@@ -452,7 +455,7 @@ export default function Navbar() {
 
             <div
               style={{
-                height: "70px",
+                height: "72px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -460,16 +463,26 @@ export default function Navbar() {
                 borderBottom: `1px solid ${C.border}`,
               }}
             >
+              <div>
+                <div
+                  style={{
+                    fontWeight: 800,
+                    fontFamily: FONTS.display,
+                    fontSize: "20px",
+                  }}
+                >
+                  Menu
+                </div>
 
-              <span
-                style={{
-                  fontFamily: FONTS.display,
-                  fontWeight: 700,
-                  fontSize: "22px",
-                }}
-              >
-                Menu
-              </span>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    color: C.textMid,
+                  }}
+                >
+                  Browse Maecky Sounds
+                </div>
+              </div>
 
               <button
                 onClick={() => setMobileOpen(false)}
@@ -477,13 +490,10 @@ export default function Navbar() {
                   border: "none",
                   background: "transparent",
                   cursor: "pointer",
-                  fontSize: "26px",
-                  color: C.textMid,
                 }}
               >
-                ×
+                  ✕
               </button>
-
             </div>
 
             {/* Links */}
