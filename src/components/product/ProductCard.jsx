@@ -148,6 +148,10 @@ export default function ProductCard({ product, variant = 'grid' }) {
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
         boxShadow: hovered ? SHADOW.cardHover : SHADOW.card,
         position: 'relative',
+        display:'flex',
+        flexDirection:'column',
+        flexGrow: 1,
+        
       }}
       aria-label={`${name} — ${formatPrice(displayPrice)}`}
     >
