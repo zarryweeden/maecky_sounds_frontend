@@ -113,11 +113,11 @@ export default function Navbar() {
             className="desktop-hamburger"
             onClick={() => setMobileOpen(v => !v)}
             style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "10px",
-              border: `1px solid ${C.border}`,
-              background: "#fff",
+              width: "44px",
+              height: "44px",
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -126,11 +126,11 @@ export default function Navbar() {
             }}
           >
             <svg
-              width="20"
-              height="20"
+              width="24"
+              height="24"
               fill="none"
               stroke={C.text}
-              strokeWidth="2"
+              strokeWidth="2.6"
               viewBox="0 0 24 24"
             >
               <path d="M3 6h18M3 12h18M3 18h18"/>
@@ -139,21 +139,23 @@ export default function Navbar() {
 
           {/* Logo */}
 
-            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '16px' }}>
-            <img
-              src="/logo-transparent.png"
-              alt="Maecky Sounds — A Complete Tune"
-              style={{
-                height: '46px',
-                width: 'auto',
-                objectFit: 'contain',
-
-              }}
-            />
-              <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>
-                Maecky <span style={{ color: C.amber }}>Sounds</span>
-              </span>
-            </Link>
+          <Link
+            to="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+            }}
+          >
+              <img
+                  src="/logo-transparent.png"
+                  alt="Maecky Sounds"
+                  style={{
+                      height: "44px",
+                      width: "auto",
+                  }}
+              />
+          </Link>
 
         </div>
 
