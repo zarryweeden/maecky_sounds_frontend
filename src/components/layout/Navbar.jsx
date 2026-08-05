@@ -139,6 +139,7 @@ export default function Navbar() {
 
           {/* Logo */}
 
+
           <Link
             to="/"
             style={{
@@ -147,15 +148,20 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-              <img
-                  src="/logo-transparent.png"
-                  alt="Maecky Sounds"
-                  style={{
-                      height: "44px",
-                      width: "auto",
-                  }}
-              />
-          </Link>
+          <img
+            src="/logo-transparent.png"
+            alt="Maecky Sounds — A Complete Tune"
+            style={{
+              height: '46px',
+              width: 'auto',
+
+
+            }}
+          />
+          <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>
+            Maecky <span style={{ color: C.amber }}>Sounds</span>
+          </span>
+        </Link>
 
         </div>
 
