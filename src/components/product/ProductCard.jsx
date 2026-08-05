@@ -237,7 +237,7 @@ export default function ProductCard({ product, variant = 'grid' }) {
           left: 0,
           right: 0,
           padding: '10px',
-          background: 'linear-gradient(to top, rgba(10,10,11,0.95), transparent)',
+          background:'linear-gradient(to top, rgba(255,255,255,.95), transparent)',
           transform: hovered ? 'translateY(0)' : 'translateY(100%)',
           transition: TRANSITION.mid,
         }}>
