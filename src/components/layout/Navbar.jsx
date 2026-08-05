@@ -94,7 +94,7 @@ export default function Navbar() {
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
-          gap: '32px',
+          gap: '20px',
         }}>
           {/* Logo */}
         <Link
@@ -164,7 +164,7 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
-            marginLeft: 'auto',
+            marginLeft: '24px',
           }} className="desktop-nav">
             {NAV_LINKS.map(link => {
               const isActive = location.pathname === link.href;
