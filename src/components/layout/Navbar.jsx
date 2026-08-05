@@ -430,23 +430,6 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <>
-        {/* Overlay */}
-        <div
-          onClick={() => setMobileOpen(false)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: mobileOpen ? 0 : "-340px",
-            width: "320px",
-            height: "100vh",
-            background: "#fff",
-            zIndex: Z.nav + 20,
-            transition: "left .3s ease",
-            boxShadow: "10px 0 40px rgba(0,0,0,.18)",
-            overflowY: "auto",
-          }}
-        />
-
         {/* Drawer */}
         <aside
           style={{
@@ -462,7 +445,7 @@ export default function Navbar() {
               : "translateX(-100%)",
             transition: "transform .35s ease",
             boxShadow: "8px 0 30px rgba(0,0,0,.15)",
-            zIndex: Z.nav + 1,
+            zIndex: Z.nav + 21,
             display: "flex",
             flexDirection: "column",
             overflowY: "auto",
@@ -619,7 +602,7 @@ export default function Navbar() {
       position: "fixed",
       inset: 0,
       background: "rgba(0,0,0,.35)",
-      zIndex: Z.nav + 10,
+      zIndex: Z.nav + 20,
     }}
   />
 )}
