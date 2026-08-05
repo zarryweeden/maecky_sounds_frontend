@@ -495,7 +495,39 @@ export default function Navbar() {
                   ✕
               </button>
             </div>
+           <div
+  style={{
+    padding: "20px",
+    borderBottom: `1px solid ${C.border}`,
+  }}
+>
+  <div
+    style={{
+      fontWeight: 700,
+      fontSize: "17px",
+      marginBottom: "6px",
+    }}
+  >
+    {isAuthenticated ? `Hello, ${user.name}` : "Hello"}
+  </div>
 
+  <button
+    onClick={() =>
+      navigate(isAuthenticated ? "/account" : "/login")
+    }
+    style={{
+      background: C.amber,
+      color: "#000",
+      border: "none",
+      padding: "10px 18px",
+      borderRadius: "8px",
+      fontWeight: 700,
+      cursor: "pointer",
+    }}
+  >
+    {isAuthenticated ? "My Account" : "Sign In"}
+  </button>
+</div>
             {/* Links */}
 
             <div
