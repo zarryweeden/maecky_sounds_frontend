@@ -68,6 +68,24 @@ export default function Navbar() {
     borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
     boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
   };
+  const MenuItem = ({ icon, label, to }) => (
+  <Link
+    to={to}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "14px",
+      padding: "16px 22px",
+      color: C.text,
+      textDecoration: "none",
+      fontWeight: 500,
+      borderBottom: `1px solid ${C.border}`,
+    }}
+  >
+    <span>{icon}</span>
+    {label}
+  </Link>
+);
 
   const iconBtnStyle = (active = false) => ({
     width: '38px',
@@ -528,6 +546,28 @@ export default function Navbar() {
     {isAuthenticated ? "My Account" : "Sign In"}
   </button>
 </div>
+<MenuItem label="Guitars" to="/category/guitars" />
+
+<MenuItem label="Keyboards" to="/category/keyboards" />
+
+<MenuItem label="Microphones" to="/category/microphones" />
+
+<MenuItem label="Studio Equipment" to="/category/studio" />
+
+<MenuItem label="Accessories" to="/category/accessories" />
+
+<div
+  style={{
+    padding: "20px",
+    fontSize: "13px",
+    color: C.textMid,
+    lineHeight: 2,
+  }}
+>
+  Help Center<br/>
+  Shipping Policy<br/>
+  Returns & Refunds
+</div>
             {/* Links */}
 
             <div
@@ -572,7 +612,17 @@ export default function Navbar() {
 
         </aside>
       </>
-
+{mobileOpen && (
+  <div
+    onClick={() => setMobileOpen(false)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,.35)",
+      zIndex: Z.nav + 10,
+    }}
+  />
+)}
       <style>{`
         @media (max-width:768px){
 
