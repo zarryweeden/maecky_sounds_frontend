@@ -120,43 +120,65 @@ export default function Navbar() {
         </Link>
 
         <div
-          onClick={openSearch}
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
             flex: 1,
-            maxWidth: '420px',
-            height: '42px',
-            background: '#F5F5F5',
-            border: `1px solid ${C.border}`,
-            borderRadius: '10px',
-            padding: '0 14px',
-            cursor: 'pointer',
-            transition: TRANSITION.fast,
+            maxWidth: '480px',
+            minWidth: '180px',
+            position: 'relative',
           }}
         >
           <svg
             width="18"
             height="18"
+            viewBox="0 0 24 24"
             fill="none"
             stroke={C.textMid}
             strokeWidth="2"
-            viewBox="0 0 24 24"
+            style={{
+              position: "absolute",
+              left: "14px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              pointerEvents: "none",
+            }}
           >
             <circle cx="11" cy="11" r="8" />
             <path d="M21 21l-4.35-4.35" />
           </svg>
 
-          <span
+          <input
+            type="text"
+            readOnly
+            onClick={openSearch}
+            placeholder="Search instruments, brands..."
             style={{
-              color: C.textMid,
-              fontSize: '14px',
+              width: "100%",
+              height: "42px",
+              padding: "0 16px 0 42px",
+              borderRadius: "10px",
+              border: `1px solid ${C.border}`,
+              background: "#F8F8F8",
+              color: C.text,
+              fontSize: "14px",
               fontFamily: FONTS.body,
+              outline: "none",
+              cursor: "pointer",
+              transition: TRANSITION.fast,
+              boxSizing: "border-box",
             }}
-          >
-            Search guitars, keyboards, microphones...
-          </span>
+            onFocus={e => {
+              e.target.blur();
+              openSearch();
+            }}
+            onMouseEnter={e => {
+              e.target.style.background = "#FFFFFF";
+              e.target.style.borderColor = C.amber;
+            }}
+            onMouseLeave={e => {
+              e.target.style.background = "#F8F8F8";
+              e.target.style.borderColor = C.border;
+            }}
+          />
         </div>
 
           {/* Desktop Nav Links */}
@@ -375,9 +397,21 @@ export default function Navbar() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: flex !important; }
+        @media (max-width:768px){
+
+          .navbar-top{
+              display:flex;
+              align-items:center;
+          }
+
+          .navbar-search{
+              order:2;
+              width:100%;
+              max-width:none;
+              margin-top:12px;
+          }
+
+      }
         }
       `}</style>
     </>
