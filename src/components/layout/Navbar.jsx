@@ -448,7 +448,12 @@ export default function Navbar() {
             maxWidth: "90vw",
             height: "100vh",
             background: "#fff",
-            willChange:"transform",
+            transform: mobileOpen
+              ? "translateX(0)"
+              : "translateX(-100%)",
+
+            transition: "transform .35s ease",
+            willChange: "transform",
             transition: "transform .35s ease",
             boxShadow: "8px 0 30px rgba(0,0,0,.15)",
             zIndex: Z.nav + 21,
