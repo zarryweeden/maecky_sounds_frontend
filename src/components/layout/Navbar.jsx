@@ -529,28 +529,7 @@ export default function Navbar() {
     {isAuthenticated ? "My Account" : "Sign In"}
   </button>
 </div>
-<MenuItem label="Guitars" to="/category/guitars" />
 
-<MenuItem label="Keyboards" to="/category/keyboards" />
-
-<MenuItem label="Microphones" to="/category/microphones" />
-
-<MenuItem label="Studio Equipment" to="/category/studio" />
-
-<MenuItem label="Accessories" to="/category/accessories" />
-
-<div
-  style={{
-    padding: "20px",
-    fontSize: "13px",
-    color: C.textMid,
-    lineHeight: 2,
-  }}
->
-  Help Center<br/>
-  Shipping Policy<br/>
-  Returns & Refunds
-</div>
             {/* Links */}
 
             <div
@@ -592,6 +571,29 @@ export default function Navbar() {
 
               ))}
             </div>
+<MenuItem label="Guitars" to="/category/guitars" />
+
+<MenuItem label="Keyboards" to="/category/keyboards" />
+
+<MenuItem label="Microphones" to="/category/microphones" />
+
+<MenuItem label="Studio Equipment" to="/category/studio" />
+
+<MenuItem label="Accessories" to="/category/accessories" />
+
+<div
+  style={{
+    padding: "20px",
+    fontSize: "13px",
+    color: C.textMid,
+    lineHeight: 2,
+  }}
+>
+  Help Center<br/>
+  Shipping Policy<br/>
+  Returns & Refunds
+</div>            
+
 
         </aside>
       </>
