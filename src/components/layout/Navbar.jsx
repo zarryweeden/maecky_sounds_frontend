@@ -89,96 +89,176 @@ export default function Navbar() {
     <>
       <nav style={navStyle} aria-label="Main navigation">
         <div style={{
-          maxWidth: '1280px',
-          width: '100%',
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '20px',
+          maxWidth: "1280px",
+          width: "100%",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "20px",
         }}>
           {/* Logo */}
-        <Link
-          to="/"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            textDecoration: 'none',
-            flexShrink: 0,
-          }}
-          aria-label="Maecky Sounds home"
-        >
-          <img
-            src="/logo-transparent.png"
-            alt="Maecky Sounds — A Complete Tune"
-            style={{
-              height: '46px',
-              width: 'auto',
-              objectFit: 'contain',
-
-            }}
-          />
-        </Link>
-
         <div
           style={{
-            flex: 1,
-            maxWidth: '480px',
-            minWidth: '180px',
-            position: 'relative',
+            display: "flex",
+            alignItems: "center",
+            gap: "14px",
+            flexShrink: 0,
           }}
         >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={C.textMid}
-            strokeWidth="2"
-            style={{
-              position: "absolute",
-              left: "14px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              pointerEvents: "none",
-            }}
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="M21 21l-4.35-4.35" />
-          </svg>
 
-          <input
-            type="text"
-            readOnly
-            onClick={openSearch}
-            placeholder="Search instruments, brands..."
+          {/* Hamburger */}
+
+          <button
+            className="desktop-hamburger"
+            onClick={() => setMobileOpen(v => !v)}
             style={{
-              width: "100%",
-              height: "42px",
-              padding: "0 16px 0 42px",
+              width: "40px",
+              height: "40px",
               borderRadius: "10px",
               border: `1px solid ${C.border}`,
-              background: "#F8F8F8",
-              color: C.text,
-              fontSize: "14px",
-              fontFamily: FONTS.body,
-              outline: "none",
+              background: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               cursor: "pointer",
               transition: TRANSITION.fast,
-              boxSizing: "border-box",
             }}
-            onFocus={e => {
-              e.target.blur();
-              openSearch();
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke={C.text}
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+          </button>
+
+          {/* Logo */}
+
+          <Link
+            to="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
             }}
-            onMouseEnter={e => {
-              e.target.style.background = "#FFFFFF";
-              e.target.style.borderColor = C.amber;
+          >
+              <img
+                  src="/logo-transparent.png"
+                  alt="Maecky Sounds"
+                  style={{
+                      height: "44px",
+                      width: "auto",
+                  }}
+              />
+          </Link>
+
+        </div>
+
+        <div
+            className="navbar-search"
+            style={{
+                flex: 1,
+                maxWidth: "620px",
+                position: "relative",
             }}
-            onMouseLeave={e => {
-              e.target.style.background = "#F8F8F8";
-              e.target.style.borderColor = C.border;
-            }}
-          />
+        >
+
+            <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke={C.textMid}
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                style={{
+                    position: "absolute",
+                    left: "16px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    pointerEvents: "none",
+                    zIndex: 2,
+                }}
+            >
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+
+            <input
+                readOnly
+                onClick={openSearch}
+                placeholder="Search guitars, keyboards, microphones..."
+                style={{
+                    width: "100%",
+                    height: "46px",
+
+                    padding: "0 56px 0 46px",
+
+                    background: "#F9F9F9",
+
+                    border: "1px solid #E5E7EB",
+
+                    borderRadius: "999px",
+
+                    fontSize: "15px",
+
+                    fontFamily: FONTS.body,
+
+                    color: C.text,
+
+                    outline: "none",
+
+                    cursor: "pointer",
+
+                    transition: "all .25s ease",
+
+                    boxSizing: "border-box",
+
+                    boxShadow: "0 2px 8px rgba(0,0,0,.04)",
+                }}
+
+                onMouseEnter={e=>{
+                    e.target.style.background="#fff";
+                    e.target.style.borderColor=C.amber;
+                    e.target.style.boxShadow="0 8px 25px rgba(232,135,26,.12)";
+                }}
+
+                onMouseLeave={e=>{
+                    e.target.style.background="#F9F9F9";
+                    e.target.style.borderColor="#E5E7EB";
+                    e.target.style.boxShadow="0 2px 8px rgba(0,0,0,.04)";
+                }}
+            />
+
+            <kbd
+                style={{
+                    position: "absolute",
+                    right: "14px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+
+                    background: "#fff",
+
+                    border: "1px solid #E5E7EB",
+
+                    borderRadius: "6px",
+
+                    padding: "2px 8px",
+
+                    fontSize: "11px",
+
+                    color: C.textMid,
+
+                    fontFamily: FONTS.mono,
+                }}
+            >
+                /
+            </kbd>
+
         </div>
 
           {/* Desktop Nav Links */}
