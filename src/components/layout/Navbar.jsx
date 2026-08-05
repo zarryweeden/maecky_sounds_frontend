@@ -119,6 +119,46 @@ export default function Navbar() {
           />
         </Link>
 
+        <div
+          onClick={openSearch}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            flex: 1,
+            maxWidth: '420px',
+            height: '42px',
+            background: '#F5F5F5',
+            border: `1px solid ${C.border}`,
+            borderRadius: '10px',
+            padding: '0 14px',
+            cursor: 'pointer',
+            transition: TRANSITION.fast,
+          }}
+        >
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            stroke={C.textMid}
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+
+          <span
+            style={{
+              color: C.textMid,
+              fontSize: '14px',
+              fontFamily: FONTS.body,
+            }}
+          >
+            Search guitars, keyboards, microphones...
+          </span>
+        </div>
+
           {/* Desktop Nav Links */}
           <div style={{
             display: 'flex',
@@ -172,18 +212,7 @@ export default function Navbar() {
                 marginLeft: '16px',
                 flexShrink: 0,
               }}>
-            {/* Search */}
-            <button
-              style={iconBtnStyle()}
-              onClick={openSearch}
-              aria-label="Open search"
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.text; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
-            >
-              <svg width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" />
-              </svg>
-            </button>
+
 
             {/* Wishlist */}
             <button
