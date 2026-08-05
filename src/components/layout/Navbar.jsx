@@ -261,49 +261,6 @@ export default function Navbar() {
 
         </div>
 
-          {/* Desktop Nav Links */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            marginLeft: '24px',
-          }} className="desktop-nav">
-            {NAV_LINKS.map(link => {
-              const isActive = location.pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: 500,
-                    fontFamily: FONTS.body,
-                    color: isActive ? C.text : C.textMid,
-                    padding: '8px 12px',
-                    borderRadius: '6px',
-                    textDecoration: 'none',
-                    transition: TRANSITION.fast,
-                    background: isActive ? 'rgba(255,255,255,0.05)' : 'transparent',
-                    whiteSpace: 'nowrap',
-                  }}
-                  onMouseEnter={e => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = C.text;
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = C.textMid;
-                      e.currentTarget.style.background = 'transparent';
-                    }
-                  }}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </div>
 
           {/* Action buttons */}
           <div   className="navbar-actions"
@@ -311,7 +268,7 @@ export default function Navbar() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                marginLeft: '16px',
+                marginLeft: '0',
                 flexShrink: 0,
               }}>
 
