@@ -130,7 +130,7 @@ export default function Navbar() {
               height="28"
               fill="none"
               stroke="currentColor"
-              strokeWidth="3"
+              strokeWidth="2"
               strokeLinecap="round"
               viewBox="0 0 24 24"
           >
