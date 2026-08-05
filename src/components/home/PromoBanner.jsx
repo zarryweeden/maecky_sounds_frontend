@@ -19,8 +19,9 @@ function TimerBlock({ value, label }) {
   return (
     <div style={{
       textAlign: 'center',
-      background: 'rgba(0,0,0,0.4)',
-      border: `1px solid ${C.border}`,
+      background: "#FFFFFF",
+      border: "1px solid #E5E7EB",
+      boxShadow:"0 6px 18px rgba(0,0,0,.06)",
       borderRadius: '8px',
       padding: '10px 18px',
       minWidth: '68px',
@@ -37,7 +38,7 @@ function TimerBlock({ value, label }) {
       </div>
       <div style={{
         fontSize: '10px',
-        color: C.textLo,
+        color: "#6B7280",
         textTransform: 'uppercase',
         letterSpacing: '0.1em',
         marginTop: '4px',
@@ -62,7 +63,7 @@ export default function PromoBanner() {
     <section style={{ paddingTop: 0 }} className="section">
       <div className="container">
         <div style={{
-            background: 'linear-gradient(135deg, rgba(232,135,26,0.08) 0%, rgba(192,57,43,0.06) 100%)',
+            background:"linear-gradient(135deg,#FFF8ED 0%,#FFF3E0 45%,#FDF2F2 100%)",
             border: `1px solid rgba(232,135,26,0.2)`,
             borderRadius: '16px',
             padding: '40px 48px',
