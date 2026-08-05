@@ -26,8 +26,8 @@ function CategoryCard({ category, index }) {
       )}
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,11,0.92) 0%, rgba(10,10,11,0.2) 60%, transparent 100%)' }} />
       <div style={{ position: 'absolute', bottom: '16px', left: '16px', right: '16px', transform: hovered ? 'translateY(-3px)' : 'translateY(0)', transition: TRANSITION.mid }}>
-        <div style={{ fontFamily: FONTS.display, fontWeight: 700, fontSize: '15px', color: C.crimson, marginBottom: '3px' }}>{category.name}</div>
-        <div style={{ fontSize: '12px', color: C.crimson}}>{category.product_count || 0} products</div>
+        <div style={{ fontFamily: FONTS.display, fontWeight: 700, fontSize: '15px', color: C.amber, marginBottom: '3px' }}>{category.name}</div>
+        <div style={{ fontSize: '12px', color: C.amber}}>{category.product_count || 0} products</div>
       </div>
       <div style={{ position: 'absolute', inset: 0, border: `2px solid ${C.amber}`, borderRadius: '12px', opacity: hovered ? 0.5 : 0, transition: TRANSITION.mid, pointerEvents: 'none' }} />
     </div>
