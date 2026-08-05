@@ -666,23 +666,6 @@ color:C.textMid
 INFORMATION
 </div>
 
-<MenuItem
-icon={<Truck size={20}/>}
-label="Shipping Policy"
-to="/shipping"
-/>
-
-<MenuItem
-icon={<RotateCcw size={20}/>}
-label="Returns & Refunds"
-to="/returns"
-/>
-
-<MenuItem
-icon={<CircleHelp size={20}/>}
-label="Help Centre"
-to="/help"
-/>
 
 <MenuItem
 icon={<Phone size={20}/>}
