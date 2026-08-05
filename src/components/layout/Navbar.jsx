@@ -502,6 +502,12 @@ export default function Navbar() {
     border: "none",
     background: "transparent",
     cursor: "pointer",
+    width:40,
+    height:40,
+    borderRadius:8,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
   }}
 >
 <svg
