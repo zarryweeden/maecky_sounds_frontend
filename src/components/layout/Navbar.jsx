@@ -111,7 +111,7 @@ const MenuItem = ({ icon, label, to }) => (
       style={{
         display: "flex",
         alignItems: "center",
-        gap: 14,
+        gap: '14px',
       }}
     >
       {icon}
@@ -159,7 +159,7 @@ const MenuItem = ({ icon, label, to }) => (
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "14px",
+            gap: "8px",
             flexShrink: 0,
           }}
         >
