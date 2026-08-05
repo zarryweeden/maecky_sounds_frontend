@@ -51,6 +51,13 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+
+    return () => {
+        document.body.style.overflow = "";
+    };
+}, [mobileOpen]);
 
   const navStyle = {
     position: 'fixed',
@@ -82,6 +89,7 @@ export default function Navbar() {
       borderBottom: `1px solid ${C.border}`,
     }}
   >
+    
     <span>{icon}</span>
     {label}
   </Link>
@@ -440,9 +448,7 @@ export default function Navbar() {
             maxWidth: "90vw",
             height: "100vh",
             background: "#fff",
-            transform: mobileOpen
-              ? "translateX(0)"
-              : "translateX(-100%)",
+            willChange:"transform",
             transition: "transform .35s ease",
             boxShadow: "8px 0 30px rgba(0,0,0,.15)",
             zIndex: Z.nav + 21,
@@ -485,16 +491,28 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <button
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  cursor: "pointer",
-                }}
-              >
-                  ✕
-              </button>
+<button
+  onClick={() => setMobileOpen(false)}
+  style={{
+    border: "none",
+    background: "transparent",
+    cursor: "pointer",
+  }}
+>
+<svg
+    width="22"
+    height="22"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+>
+    <path
+        d="M18 6L6 18M6 6l12 12"
+        strokeLinecap="round"
+    />
+</svg>
+</button>
             </div>
            <div
   style={{
@@ -597,6 +615,7 @@ export default function Navbar() {
 
         </aside>
       </>
+      
 {mobileOpen && (
   <div
     onClick={() => setMobileOpen(false)}
