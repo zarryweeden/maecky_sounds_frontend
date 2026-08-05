@@ -125,16 +125,19 @@ export default function Navbar() {
               transition: TRANSITION.fast,
             }}
           >
-            <svg
-              width="24"
-              height="24"
+          <svg
+              width="28"
+              height="28"
               fill="none"
-              stroke={C.text}
-              strokeWidth="2.6"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
               viewBox="0 0 24 24"
-            >
-              <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap='round'/>
-            </svg>
+          >
+              <path d="M3 6h18" />
+              <path d="M3 12h18" />
+              <path d="M3 18h18" />
+          </svg>
           </button>
 
           {/* Logo */}
@@ -408,39 +411,125 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <div style={{
-        position: 'fixed',
-        top: '64px',
-        left: 0,
-        right: 0,
-        background: 'rgba(255,255,255,0.98)',
-        borderBottom: `1px solid ${C.border}`,
-        zIndex: Z.nav - 1,
-        transform: mobileOpen ? 'translateY(0)' : 'translateY(-100%)',
-        opacity: mobileOpen ? 1 : 0,
-        transition: 'transform 0.3s ease, opacity 0.2s ease',
-        pointerEvents: mobileOpen ? 'all' : 'none',
-        padding: '16px 24px 24px',
-      }}>
-        {NAV_LINKS.map(link => (
-          <Link
-            key={link.href}
-            to={link.href}
-            style={{
-              display: 'block',
-              padding: '12px 0',
-              fontFamily: FONTS.body,
-              fontSize: '16px',
-              fontWeight: 500,
-              color: location.pathname === link.href ? C.amber : C.textMid,
-              textDecoration: 'none',
-              borderBottom: `1px solid ${C.border}`,
-            }}
-          >
-            {link.label}
-          </Link>
-        ))}
-      </div>
+      <>
+        {/* Overlay */}
+        <div
+          onClick={() => setMobileOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,.45)",
+            opacity: mobileOpen ? 1 : 0,
+            pointerEvents: mobileOpen ? "all" : "none",
+            transition: "opacity .3s ease",
+            zIndex: Z.nav - 1,
+          }}
+        />
+
+        {/* Drawer */}
+        <aside
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "320px",
+            maxWidth: "90vw",
+            height: "100vh",
+            background: "#fff",
+            transform: mobileOpen
+              ? "translateX(0)"
+              : "translateX(-100%)",
+            transition: "transform .35s ease",
+            boxShadow: "8px 0 30px rgba(0,0,0,.15)",
+            zIndex: Z.nav + 1,
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+          }}
+        >
+
+            {/* Header */}
+
+            <div
+              style={{
+                height: "70px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "0 20px",
+                borderBottom: `1px solid ${C.border}`,
+              }}
+            >
+
+              <span
+                style={{
+                  fontFamily: FONTS.display,
+                  fontWeight: 700,
+                  fontSize: "22px",
+                }}
+              >
+                Menu
+              </span>
+
+              <button
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                  fontSize: "26px",
+                  color: C.textMid,
+                }}
+              >
+                ×
+              </button>
+
+            </div>
+
+            {/* Links */}
+
+            <div
+              style={{
+                padding: "14px 0",
+              }}
+            >
+              {NAV_LINKS.map(link => (
+
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "15px 22px",
+                    textDecoration: "none",
+                    color:
+                      location.pathname === link.href
+                        ? C.amber
+                        : C.text,
+                    fontSize: "16px",
+                    fontWeight: 500,
+                    borderBottom: `1px solid ${C.border}`,
+                  }}
+                >
+                  {link.label}
+
+                  <span
+                    style={{
+                      color: C.textLo,
+                    }}
+                  >
+                    ›
+                  </span>
+
+                </Link>
+
+              ))}
+            </div>
+
+        </aside>
+      </>
 
       <style>{`
         @media (max-width:768px){
