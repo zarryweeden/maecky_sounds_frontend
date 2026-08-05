@@ -23,8 +23,8 @@ function TimerBlock({ value, label }) {
       border: "1px solid #E5E7EB",
       boxShadow:"0 6px 18px rgba(0,0,0,.06)",
       borderRadius: '8px',
-      padding: '10px 18px',
-      minWidth: '68px',
+      padding: '8px 10px',
+      minWidth: '52px',
     }}>
       <div style={{
         fontFamily: FONTS.mono,
@@ -75,6 +75,7 @@ export default function PromoBanner() {
             position: 'relative',
             overflow: 'hidden',
             boxShadow:"0 12px 40px rgba(0,0,0,.08)",
+            
 
         }}>
           {/* Background glow */}
