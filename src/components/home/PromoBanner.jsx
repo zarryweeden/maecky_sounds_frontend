@@ -84,21 +84,24 @@ export default function PromoBanner() {
             right: '20%',
             width: '300px',
             height: '300px',
-            background: 'radial-gradient(circle, rgba(232,135,26,0.12), transparent 65%)',
+            background: "radial-gradient(circle, rgba(232,135,26,.18), transparent 70%)",
             borderRadius: '50%',
             pointerEvents: 'none',
           }} />
 
           <div style={{ position: 'relative', zIndex: 1 }}>
             <div style={{
-              fontSize: '11px',
-              fontFamily: FONTS.mono,
-              color: C.crimson,
-              textTransform: 'uppercase',
-              letterSpacing: '0.12em',
-              marginBottom: '8px',
+              display:"inline-flex",
+              alignItems:"center",
+              gap:"6px",
+              padding:"6px 12px",
+              background:"#FFF0F0",
+              color:C.crimson,
+              borderRadius:"999px",
+              fontWeight:700,
+              fontSize:"11px"
             }}>
-              ● Live Sale
+              🔴 LIVE SALE
             </div>
             <h2 style={{
               fontFamily: FONTS.display,
@@ -162,7 +165,7 @@ export default function PromoBanner() {
             variant="primary"
             size="lg"
             onClick={() => navigate('/category/guitars')}
-            style={{ position: 'relative', zIndex: 1, flexShrink: 0 }}
+            style={{ position: 'relative', zIndex: 1, flexShrink: 0,boxShadow:"0 8px 20px rgba(232,135,26,.25)" }}
           >
             Shop Sale
           </Button>
