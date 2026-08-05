@@ -158,7 +158,7 @@ export default function Navbar() {
 
             }}
           />
-          <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>
+          <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '20px', color: C.text }}>
             Maecky <span style={{ color: C.amber }}>Sounds</span>
           </span>
         </Link>
