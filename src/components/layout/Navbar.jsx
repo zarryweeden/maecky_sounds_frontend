@@ -171,7 +171,7 @@ export default function Navbar() {
                 flex: 1,
                 maxWidth: "620px",
                 position: "relative",
-                marginLeft:'auto'
+                marginLeft:'0px'
             }}
         >
 
@@ -277,6 +277,7 @@ export default function Navbar() {
                 gap: '6px',
                 marginLeft: '0',
                 flexShrink: 0,
+
               }}>
 
 
