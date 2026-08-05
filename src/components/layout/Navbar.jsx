@@ -467,7 +467,30 @@ const MenuItem = ({ icon, label, to }) => (
       </nav>
 
       {/* Mobile Menu */}
-<aside>
+<aside 
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "320px",
+            maxWidth: "90vw",
+            height: "100vh",
+            background: "#fff",
+            transform: mobileOpen
+              ? "translateX(0)"
+              : "translateX(-100%)",
+
+            transition: "transform .35s ease",
+            willChange: "transform",
+            transition: "transform .35s ease",
+            boxShadow: "8px 0 30px rgba(0,0,0,.15)",
+            zIndex: Z.nav + 21,
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+          }}
+
+>
   {/* Header */}
 <div
   style={{
