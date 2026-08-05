@@ -139,23 +139,21 @@ export default function Navbar() {
 
           {/* Logo */}
 
-          <Link
-            to="/"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              textDecoration: "none",
-            }}
-          >
-              <img
-                  src="/logo-transparent.png"
-                  alt="Maecky Sounds"
-                  style={{
-                      height: "44px",
-                      width: "auto",
-                  }}
-              />
-          </Link>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '16px' }}>
+            <img
+              src="/logo-transparent.png"
+              alt="Maecky Sounds — A Complete Tune"
+              style={{
+                height: '46px',
+                width: 'auto',
+                objectFit: 'contain',
+
+              }}
+            />
+              <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '17px', color: C.text }}>
+                Maecky <span style={{ color: C.amber }}>Sounds</span>
+              </span>
+            </Link>
 
         </div>
 
