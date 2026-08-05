@@ -153,6 +153,7 @@ const MenuItem = ({ icon, label, to }) => (
           justifyContent: "space-between",
           gap: "20px",
         }}>
+        <div className="navbar-top">
           {/* Logo */}
         <div
           style={{
@@ -463,6 +464,7 @@ const MenuItem = ({ icon, label, to }) => (
               )}
             </button>
           </div>
+          </div>
         </div>
       </nav>
 
@@ -724,7 +726,7 @@ Your Complete Tune
           }
 
       }
-        }
+  
       `}</style>
     </>
   );
