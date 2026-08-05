@@ -456,3 +456,31 @@ body::before {
     }
 
 }
+
+
+.navbar-inner{
+    max-width:1280px;
+    width:100%;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+@media(max-width:768px){
+
+.navbar-inner{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:12px;
+
+}
+
+}
+
