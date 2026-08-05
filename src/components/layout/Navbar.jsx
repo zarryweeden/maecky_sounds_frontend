@@ -133,7 +133,7 @@ export default function Navbar() {
               strokeWidth="2.6"
               viewBox="0 0 24 24"
             >
-              <path d="M3 6h18M3 12h18M3 18h18"/>
+              <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap='round'/>
             </svg>
           </button>
 
@@ -198,7 +198,7 @@ export default function Navbar() {
             <input
                 readOnly
                 onClick={openSearch}
-                placeholder="Search guitars, keyboards, microphones..."
+                placeholder="Search instruments, gear & accessories"
                 style={{
                     width: "100%",
                     height: "46px",
@@ -225,7 +225,7 @@ export default function Navbar() {
 
                     boxSizing: "border-box",
 
-                    boxShadow: "0 2px 8px rgba(0,0,0,.04)",
+                    boxShadow: "0 1px 3px rgba(0,0,0,.06), 0 8px 20px rgba(0,0,0,.03)",
                 }}
 
                 onMouseEnter={e=>{
@@ -353,7 +353,8 @@ export default function Navbar() {
               style={{
                   background: C.amber,
                   color: '#000',
-                  padding: '8px 16px',
+                  padding: '0px 18px',
+                  height:42,
                   borderRadius: '8px',
                   border: 'none',
                   fontWeight: 700,
