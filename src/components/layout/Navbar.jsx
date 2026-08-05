@@ -82,7 +82,7 @@ export default function Navbar() {
     top: 0,
     left: 0,
     right: 0,
-    height: '64px',
+    minHeight: '64px',
     zIndex: Z.nav,
     display: 'flex',
     alignItems: 'center',
@@ -144,7 +144,7 @@ const MenuItem = ({ icon, label, to }) => (
   return (
     <>
       <nav style={navStyle} aria-label="Main navigation">
-        <div style={{
+        <div className="navbar-inner" style={{
           maxWidth: "1280px",
           width: "100%",
           margin: "0 auto",
