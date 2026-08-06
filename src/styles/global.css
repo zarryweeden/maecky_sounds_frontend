@@ -599,7 +599,8 @@ body::before {
   }
 
   .nav-logo-text {
-    display: none;
+    display:inline;
+    font-size:14px;
   }
 
   .nav-account-btn {
