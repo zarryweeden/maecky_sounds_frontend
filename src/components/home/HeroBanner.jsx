@@ -13,13 +13,13 @@ export default function HeroBanner() {
   }, []);
 
   return (
-    <section style={{
+    <section className="hero-section" style={{
       position: 'relative',
       minHeight: '100vh',
-      paddingTop: '64px',
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden',
+      
     }}>
       {/* Ambient radial glow */}
       <div style={{
@@ -218,9 +218,7 @@ export default function HeroBanner() {
         @media (max-width: 1024px) {
           .hero-image-wrap { display: none !important; }
         }
-        @media (max-width: 768px) {
-          section { min-height: 90vh; }
-        }
+
       `}</style>
     </section>
   );

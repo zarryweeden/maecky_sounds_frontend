@@ -4,11 +4,23 @@
   margin: 0;
   padding: 0;
 }
+:root{
+    --navbar-height:64px;
+}
 
+@media (max-width:768px){
+    :root{
+        --navbar-height:116px;
+    }
+}
 html {
   scroll-behavior: smooth;
   font-size: 16px;
 }
+
+
+
+
 
 body {
   background-color: #FFFFFF;
@@ -637,4 +649,8 @@ body::before {
   .navbar-drawer {
     width: 88vw !important;
   }
+}
+
+.hero-section{
+    padding-top:var(--navbar-height);
 }
