@@ -143,332 +143,162 @@ const MenuItem = ({ icon, label, to }) => (
 
   return (
     <>
-      <nav style={navStyle} aria-label="Main navigation">
-        <div className="navbar-inner" style={{
-          maxWidth: "1280px",
-          width: "100%",
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "20px",
-        }}>
-        <div className="navbar-top">
-          {/* Logo */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            flexShrink: 0,
-          }}
-        >
+<nav style={navStyle} aria-label="Main navigation">
 
-          {/* Hamburger */}
+<div className="navbar-inner">
 
-          <button
-            className="desktop-hamburger"
-            onClick={() => setMobileOpen(v => !v)}
-            style={{
-              width: "44px",
-              height: "44px",
-              padding:0,
-              margin:0,
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              transition: TRANSITION.fast,
-            }}
-          >
-          <svg
-              width="28"
-              height="28"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              viewBox="0 0 24 24"
-          >
-              <path d="M3 6h18" />
-              <path d="M3 12h18" />
-              <path d="M3 18h18" />
-          </svg>
-          </button>
+    <div className="navbar-top">
 
-          {/* Logo */}
+        <div className="navbar-brand">
 
+            <button
+                className="desktop-hamburger"
+                onClick={() => setMobileOpen(v => !v)}
+            >
+                <svg
+                    width="28"
+                    height="28"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M3 6h18"/>
+                    <path d="M3 12h18"/>
+                    <path d="M3 18h18"/>
+                </svg>
+            </button>
 
-          <Link
-            to="/"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              textDecoration: "none",
-            }}
-          >
-          <img
-            src="/logo-transparent.png"
-            alt="Maecky Sounds — A Complete Tune"
-            style={{
-              height: '46px',
-              width: 'auto',
+            <Link to="/" className="navbar-logo">
 
+                <img
+                    src="/logo-transparent.png"
+                    alt="Maecky Sounds"
+                    className="navbar-logo-image"
+                />
 
-            }}
-          />
-          <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: '20px', color: C.text }}>
-            Maecky <span style={{ color: C.amber }}>Sounds</span>
-          </span>
-        </Link>
+                <span className="navbar-logo-text">
+                    Maecky <span style={{color:C.amber}}>Sounds</span>
+                </span>
+
+            </Link>
 
         </div>
 
-        <div
-            className="navbar-search"
-            style={{
-                flex: 1,
-                maxWidth: "620px",
-                position: "relative",
-                marginLeft:'0px'
-            }}
-        >
-
-            <svg
-                width="18"
-                height="18"
-                fill="none"
-                stroke={C.textMid}
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                style={{
-                    position: "absolute",
-                    left: "16px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    pointerEvents: "none",
-                    zIndex: 2,
-                }}
-            >
-                <circle cx="11" cy="11" r="8"/>
-                <path d="M21 21l-4.35-4.35"/>
-            </svg>
-
-            <input
-                readOnly
-                onClick={openSearch}
-                placeholder="Search instruments, gear & accessories"
-                style={{
-                    width: "100%",
-                    height: "46px",
-
-                    padding: "0 56px 0 46px",
-
-                    background: "#F9F9F9",
-
-                    border: "1px solid #E5E7EB",
-
-                    borderRadius: "999px",
-
-                    fontSize: "15px",
-
-                    fontFamily: FONTS.body,
-
-                    color: C.text,
-
-                    outline: "none",
-
-                    cursor: "pointer",
-
-                    transition: "all .25s ease",
-
-                    boxSizing: "border-box",
-
-                    boxShadow: "0 1px 3px rgba(0,0,0,.06), 0 8px 20px rgba(0,0,0,.03)",
-                }}
-
-                onMouseEnter={e=>{
-                    e.target.style.background="#fff";
-                    e.target.style.borderColor=C.amber;
-                    e.target.style.boxShadow="0 8px 25px rgba(232,135,26,.12)";
-                }}
-
-                onMouseLeave={e=>{
-                    e.target.style.background="#F9F9F9";
-                    e.target.style.borderColor="#E5E7EB";
-                    e.target.style.boxShadow="0 2px 8px rgba(0,0,0,.04)";
-                }}
-            />
-
-            <kbd
-                style={{
-                    position: "absolute",
-                    right: "14px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-
-                    background: "#fff",
-
-                    border: "1px solid #E5E7EB",
-
-                    borderRadius: "6px",
-
-                    padding: "2px 8px",
-
-                    fontSize: "11px",
-
-                    color: C.textMid,
-
-                    fontFamily: FONTS.mono,
-                }}
-            >
-                /
-            </kbd>
-
-        </div>
-
-
-          {/* Action buttons */}
-          <div   className="navbar-actions"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                marginLeft: '0',
-                flexShrink: 0,
-
-              }}>
-
+        <div className="navbar-actions">
 
             {/* Wishlist */}
+
             <button
-              style={iconBtnStyle()}
-              onClick={() => navigate('/wishlist')}
-              aria-label={`Wishlist (${wishCount} items)`}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.text; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
+                style={iconBtnStyle()}
+                onClick={()=>navigate("/wishlist")}
             >
-              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-              </svg>
-              {wishCount > 0 && (
-                <span style={{
-                  position: 'absolute',
-                  top: '4px',
-                  right: '4px',
-                  width: '16px',
-                  height: '16px',
-                  background: C.amber,
-                  color: '#000',
-                  fontSize: '10px',
-                  fontWeight: 700,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: FONTS.body,
-                }}>
-                  {wishCount > 9 ? '9+' : wishCount}
-                </span>
-              )}
+
+                <svg
+                    width="22"
+                    height="22"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                </svg>
+
+                {wishCount>0 &&
+                    <span className="navbar-badge">
+                        {wishCount>9?"9+":wishCount}
+                    </span>
+                }
+
             </button>
 
             {/* Account */}
+
             <button
-              style={iconBtnStyle()}
-              onClick={() => navigate(isAuthenticated ? '/account' : '/login')}
-              aria-label={isAuthenticated ? `My account (${user?.name})` : 'Sign in'}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.text; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
+                style={iconBtnStyle()}
+                onClick={()=>navigate(isAuthenticated?"/account":"/login")}
             >
-              {isAuthenticated && user ? (
-                <div style={{
-                  width: '28px',
-                  height: '28px',
-                  borderRadius: '50%',
-                  background: C.amberLo,
-                  border: `1.5px solid rgba(232,135,26,0.4)`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: FONTS.display,
-                  fontWeight: 700,
-                  fontSize: '11px',
-                  color: C.amber,
-                }}>
-                  {user.name?.[0]?.toUpperCase() || 'U'}
-                </div>
-              ) : (
-                <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
-                </svg>
-              )}
+
+                {isAuthenticated && user ? (
+
+                    <div className="navbar-avatar">
+                        {user.name?.[0]?.toUpperCase() || "U"}
+                    </div>
+
+                ) : (
+
+                    <svg
+                        width="22"
+                        height="22"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        viewBox="0 0 24 24"
+                    >
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+
+                )}
+
             </button>
 
             {/* Cart */}
+
             <button
-              onClick={openCart}
-              aria-label={`Shopping cart (${itemCount} items)`}
-              style={{
-                  background: C.amber,
-                  color: '#000',
-                  padding: '0px 18px',
-                  height:42,
-                  borderRadius: '8px',
-                  border: 'none',
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  fontFamily: FONTS.body,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: TRANSITION.fast,
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = C.amberHi; }}
-              onMouseLeave={e => { e.currentTarget.style.background = C.amber; }}
+                className="navbar-cart-btn"
+                onClick={openCart}
             >
-              <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 01-8 0" />
-              </svg>
-              Cart
-              {itemCount > 0 && (
-                <span style={{
-                  background: 'rgba(0,0,0,0.25)',
-                  borderRadius: '99px',
-                  padding: '1px 7px',
-                  fontSize: '12px',
-                  fontWeight: 800,
-                }}>
-                  {itemCount}
+
+                <svg
+                    width="17"
+                    height="17"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+
+                <span className="cart-text">
+                    Cart
                 </span>
-              )}
+
+                {itemCount>0 &&
+                    <span className="cart-count">
+                        {itemCount}
+                    </span>
+                }
+
             </button>
 
-            {/* Mobile hamburger */}
-            <button
-              style={{ ...iconBtnStyle(), display: 'none' }}
-              onClick={() => setMobileOpen(v => !v)}
-              aria-label="Toggle mobile menu"
-              className="mobile-menu-btn"
-            >
-              {mobileOpen ? (
-                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
-                </svg>
-              ) : (
-                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" />
-                </svg>
-              )}
-            </button>
-          </div>
-          </div>
         </div>
-      </nav>
+
+    </div>
+
+    <div className="navbar-search">
+
+        <input
+            readOnly
+            onClick={openSearch}
+            placeholder="Search instruments, gear & accessories"
+            className="navbar-search-input"
+        />
+
+        <kbd className="navbar-search-shortcut">
+            /
+        </kbd>
+
+    </div>
+
+</div>
+
+</nav>
 
       {/* Mobile Menu */}
 <aside 
