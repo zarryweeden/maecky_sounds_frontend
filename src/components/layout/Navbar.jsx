@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
 import { useWishlistContext } from '../../context/WishlistContext';
@@ -17,17 +17,10 @@ import {
   Phone,
   Info,
   ChevronRight,
-} from "lucide-react";
-
-const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Shop', href: '/category/guitars' },
-  { label: 'Deals', href: '/category/guitars?sale=true' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'About', href: '/about' },
-];
+} from 'lucide-react';
 
 export default function Navbar() {
+  const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -37,6 +30,28 @@ export default function Navbar() {
   const { itemCount: wishCount } = useWishlistContext();
   const { isAuthenticated, user } = useAuthContext();
   const { openCart, openSearch } = useUIContext();
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const updateHeight = () => {
+      document.documentElement.style.setProperty(
+        '--navbar-height',
+        `${nav.offsetHeight}px`
+      );
+    };
+
+    updateHeight();
+    const ro = new ResizeObserver(updateHeight);
+    ro.observe(nav);
+    window.addEventListener('resize', updateHeight);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', updateHeight);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -88,41 +103,18 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── NAV SHELL ─────────────────────────────────────────── */}
       <nav
+        ref={navRef}
         aria-label="Main navigation"
+        className="navbar"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: Z.nav,
           background: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.92)',
-          backdropFilter: 'blur(16px)',
           borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
           boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
-          transition: 'all 0.3s ease',
         }}
       >
-        <div
-          style={{
-            maxWidth: '1280px',
-            margin: '0 auto',
-            padding: '0 24px',
-          }}
-        >
-
-          {/* ── ROW 1: hamburger · logo · actions ─────────────── */}
-          <div
-            className="navbar-top"
-            style={{
-              height: '64px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
-            {/* Hamburger — always visible */}
+        <div className="navbar-inner">
+          <div className="navbar-top">
             <button
               onClick={() => setMobileOpen(v => !v)}
               aria-label="Open menu"
@@ -132,30 +124,19 @@ export default function Navbar() {
                 flexShrink: 0,
                 color: C.text,
               }}
-              onMouseEnter={e => e.currentTarget.style.background = C.amberLo}
-              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+              onMouseEnter={e => { e.currentTarget.style.background = C.amberLo; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
             >
               <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24">
                 <path d="M3 6h18M3 12h18M3 18h18" />
               </svg>
             </button>
 
-            {/* Logo */}
-            <Link
-              to="/"
-              className="navbar-logo"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                textDecoration: 'none',
-                flexShrink: 0,
-                gap: '8px',
-              }}
-            >
+            <Link to="/" className="navbar-logo">
               <img
                 src="/logo-transparent.png"
                 alt="Maecky Sounds"
-                style={{ height: '42px', width: 'auto' }}
+                className="navbar-logo-img"
               />
               <span
                 className="nav-logo-text"
@@ -164,33 +145,19 @@ export default function Navbar() {
                   fontWeight: 800,
                   fontSize: '20px',
                   color: C.text,
-                  whiteSpace: 'nowrap',
                 }}
               >
                 Maecky <span style={{ color: C.amber }}>Sounds</span>
               </span>
             </Link>
 
-            {/* Search — desktop only (hidden on mobile via CSS) */}
-            <div
-              className="nav-search-desktop"
-              style={{
-                flex: 1,
-                maxWidth: '520px',
-                position: 'relative',
-                margin: '0 16px',
-              }}
-            >
+            <div className="nav-search-desktop">
               <SearchBox openSearch={openSearch} />
             </div>
 
-            {/* Spacer pushes actions to the right on desktop */}
-            <div style={{ flex: 1 }} className="nav-spacer-mobile-hide" />
+            <div className="nav-spacer-mobile-hide" />
 
-            {/* Actions */}
-            <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
-
-              {/* Wishlist */}
+            <div className="navbar-actions">
               <button
                 style={iconBtnStyle}
                 className="navbar-icon-btn"
@@ -216,9 +183,8 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Account — desktop only */}
               <button
-                className="nav-account-btn"
+                className="nav-account-btn navbar-icon-btn"
                 style={iconBtnStyle}
                 onClick={() => navigate(isAuthenticated ? '/account' : '/login')}
                 aria-label={isAuthenticated ? 'My account' : 'Sign in'}
@@ -242,7 +208,6 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Cart */}
               <button
                 onClick={openCart}
                 aria-label={`Cart (${itemCount} items)`}
@@ -250,30 +215,21 @@ export default function Navbar() {
                 style={{
                   background: C.amber,
                   color: '#000',
-                  height: '42px',
-                  padding: '0 18px',
-                  borderRadius: '8px',
                   border: 'none',
                   fontWeight: 700,
                   fontSize: '14px',
                   fontFamily: FONTS.body,
                   cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
                   transition: TRANSITION.fast,
-                  flexShrink: 0,
-                  whiteSpace: 'nowrap',
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = C.amberHi}
-                onMouseLeave={e => e.currentTarget.style.background = C.amber}
+                onMouseEnter={e => { e.currentTarget.style.background = C.amberHi; }}
+                onMouseLeave={e => { e.currentTarget.style.background = C.amber; }}
               >
                 <svg className="navbar-icon-svg" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 01-8 0" />
                 </svg>
-                {/* Hide "Cart" text on small screens */}
                 <span className="cart-label">Cart</span>
                 {itemCount > 0 && (
                   <span style={{
@@ -290,34 +246,18 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* ── ROW 2: search — mobile only ───────────────────── */}
           <div className="nav-search-mobile navbar-search-mobile">
             <SearchBox openSearch={openSearch} />
           </div>
-
         </div>
       </nav>
 
-      {/* ── SLIDE-IN DRAWER ───────────────────────────────────── */}
       <aside
         className="navbar-drawer"
         style={{
-          position: 'fixed',
-          top: 0, left: 0,
-          width: '320px',
-          maxWidth: '90vw',
-          height: '100vh',
-          background: '#fff',
           transform: mobileOpen ? 'translateX(0)' : 'translateX(-100%)',
-          transition: 'transform 0.35s cubic-bezier(0.22,1,0.36,1)',
-          boxShadow: '8px 0 30px rgba(0,0,0,0.12)',
-          zIndex: Z.nav + 21,
-          display: 'flex',
-          flexDirection: 'column',
-          overflowY: 'auto',
         }}
       >
-        {/* Drawer header */}
         <div style={{
           height: 72,
           padding: '0 20px',
@@ -350,7 +290,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Account row */}
         <div style={{ padding: 20, borderBottom: `1px solid ${C.border}` }}>
           <div style={{ fontWeight: 700, marginBottom: 8, color: C.text, fontSize: 15 }}>
             {isAuthenticated ? `Hello, ${user?.full_name || user?.name || 'there'}` : 'Welcome'}
@@ -370,32 +309,28 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Shop links */}
         <div style={{ paddingTop: 18 }}>
           <SectionLabel>SHOP</SectionLabel>
-          <MenuItem icon={<Guitar size={20} />} label="Guitars" to="/category/guitars" location={location} />
-          <MenuItem icon={<Piano size={20} />} label="Keyboards & Pianos" to="/category/keyboards-pianos" location={location} />
-          <MenuItem icon={<Mic2 size={20} />} label="Studio & Recording" to="/category/studio-recording" location={location} />
-          <MenuItem icon={<Headphones size={20} />} label="DJ Equipment" to="/category/dj-equipment" location={location} />
-          <MenuItem icon={<Package size={20} />} label="Accessories" to="/category/accessories" location={location} />
+          <MenuItem icon={<Guitar size={20} />} label="Guitars" to="/category/guitars" />
+          <MenuItem icon={<Piano size={20} />} label="Keyboards & Pianos" to="/category/keyboards-pianos" />
+          <MenuItem icon={<Mic2 size={20} />} label="Studio & Recording" to="/category/studio-recording" />
+          <MenuItem icon={<Headphones size={20} />} label="DJ Equipment" to="/category/dj-equipment" />
+          <MenuItem icon={<Package size={20} />} label="Accessories" to="/category/accessories" />
         </div>
 
-        {/* Discover */}
         <div style={{ paddingTop: 20 }}>
           <SectionLabel>DISCOVER</SectionLabel>
-          <MenuItem icon={<BadgePercent size={20} />} label="Deals" to="/category/guitars" location={location} />
-          <MenuItem icon={<Heart size={20} />} label="Wishlist" to="/wishlist" location={location} />
-          <MenuItem icon={<ShoppingCart size={20} />} label="Cart" to="/cart" location={location} />
+          <MenuItem icon={<BadgePercent size={20} />} label="Deals" to="/category/guitars" />
+          <MenuItem icon={<Heart size={20} />} label="Wishlist" to="/wishlist" />
+          <MenuItem icon={<ShoppingCart size={20} />} label="Cart" to="/cart" />
         </div>
 
-        {/* Info */}
         <div style={{ paddingTop: 20 }}>
           <SectionLabel>INFORMATION</SectionLabel>
-          <MenuItem icon={<Phone size={20} />} label="Contact Us" to="/contact" location={location} />
-          <MenuItem icon={<Info size={20} />} label="About Maecky Sounds" to="/about" location={location} />
+          <MenuItem icon={<Phone size={20} />} label="Contact Us" to="/contact" />
+          <MenuItem icon={<Info size={20} />} label="About Maecky Sounds" to="/about" />
         </div>
 
-        {/* Footer */}
         <div style={{
           marginTop: 'auto',
           padding: 20,
@@ -408,125 +343,24 @@ export default function Navbar() {
         </div>
       </aside>
 
-      {/* Backdrop */}
       {mobileOpen && (
         <div
           onClick={() => setMobileOpen(false)}
-          style={{
-            position: 'fixed', inset: 0,
-            background: 'rgba(0,0,0,0.35)',
-            zIndex: Z.nav + 20,
-          }}
+          className="navbar-drawer-backdrop"
         />
       )}
-
-      {/* ── RESPONSIVE STYLES ─────────────────────────────────── */}
-      <style>{`
-        /* Desktop: show search in row 1, hide row 2 search */
-        .nav-search-desktop { display: block; }
-        .nav-search-mobile  { display: none;  }
-        .nav-spacer-mobile-hide { display: flex; }
-
-        /* Desktop: show account button */
-        .nav-account-btn { display: flex; }
-
-        /* Desktop: show logo text */
-        .nav-logo-text { display: inline; }
-
-        /* Desktop: show cart label */
-        .cart-label { display: inline; }
-
-        /* ── Tablet ── */
-        @media (max-width: 900px) {
-          .nav-logo-text { font-size: 16px !important; }
-        }
-
-        /* ── Mobile ── */
-        @media (max-width: 768px) {
-          /* Move search to row 2 */
-          .nav-search-desktop { display: none !important; }
-          .nav-search-mobile  { display: block !important; }
-
-          /* Remove spacer so actions sit right after logo */
-          .nav-spacer-mobile-hide { display: none !important; }
-
-          /* Hide logo text on small phones */
-          .nav-logo-text { display: none !important; }
-
-          /* Hide account icon — accessed via drawer */
-          .nav-account-btn { display: none !important; }
-
-          /* Hide cart text label */
-          .cart-label { display: none !important; }
-
-          /* Container padding */
-          nav > div { padding: 0 16px !important; }
-
-          /* ── Row 1: hamburger | logo (centered) | actions ── */
-          .navbar-top {
-            display: grid !important;
-            grid-template-columns: 40px 1fr auto;
-            column-gap: 8px;
-          }
-
-          .navbar-hamburger {
-            width: 36px !important;
-            height: 36px !important;
-          }
-
-          .navbar-logo {
-            justify-self: center;
-          }
-
-          .navbar-actions {
-            justify-self: end;
-            gap: 6px !important;
-          }
-
-          .navbar-icon-btn {
-            width: 34px !important;
-            height: 34px !important;
-          }
-
-          .navbar-icon-svg {
-            width: 20px !important;
-            height: 20px !important;
-          }
-
-          .navbar-cart-btn {
-            height: 34px !important;
-            padding: 0 10px !important;
-            gap: 5px !important;
-          }
-
-          /* ── Row 2: full-width mobile search ── */
-          .navbar-search-mobile {
-            padding: 8px 0 12px;
-          }
-
-          .navbar-search-mobile .search-kbd-hint {
-            display: none !important;
-          }
-        }
-      `}</style>
     </>
   );
 }
 
-/* ── Shared sub-components ──────────────────────────────────────────────── */
-
 function SearchBox({ openSearch }) {
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div className="search-box">
       <svg
         width="18" height="18"
         fill="none" stroke="#9090A0" strokeWidth="2"
         viewBox="0 0 24 24"
-        style={{
-          position: 'absolute', left: '16px',
-          top: '50%', transform: 'translateY(-50%)',
-          pointerEvents: 'none', zIndex: 2,
-        }}
+        className="search-box-icon"
       >
         <circle cx="11" cy="11" r="8" />
         <path d="M21 21l-4.35-4.35" />
@@ -535,21 +369,7 @@ function SearchBox({ openSearch }) {
         readOnly
         onClick={openSearch}
         placeholder="Search instruments, gear & accessories"
-        style={{
-          width: '100%',
-          height: '44px',
-          padding: '0 48px 0 46px',
-          background: '#F9F9F9',
-          border: '1px solid #E5E7EB',
-          borderRadius: '999px',
-          fontSize: '14px',
-          fontFamily: 'Inter, sans-serif',
-          color: '#111113',
-          outline: 'none',
-          cursor: 'pointer',
-          boxSizing: 'border-box',
-          transition: 'all 0.2s ease',
-        }}
+        className="search-box-input"
         onMouseEnter={e => {
           e.target.style.background = '#fff';
           e.target.style.borderColor = '#E8871A';
@@ -561,17 +381,7 @@ function SearchBox({ openSearch }) {
           e.target.style.boxShadow = 'none';
         }}
       />
-      <kbd className="search-kbd-hint" style={{
-        position: 'absolute', right: '14px',
-        top: '50%', transform: 'translateY(-50%)',
-        background: '#fff', border: '1px solid #E5E7EB',
-        borderRadius: '6px', padding: '2px 8px',
-        fontSize: '11px', color: '#9090A0',
-        fontFamily: 'JetBrains Mono, monospace',
-        pointerEvents: 'none',
-      }}>
-        /
-      </kbd>
+      <kbd className="search-kbd-hint">/</kbd>
     </div>
   );
 }

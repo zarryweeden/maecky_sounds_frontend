@@ -10,7 +10,7 @@ import NewsletterSection from '../components/home/NewsletterSection';
 
 export default function HomePage() {
   return (
-    <PageWrapper style={{ paddingTop: 0 }}>
+    <PageWrapper flush>
       <HeroBanner />
       <CategoryGrid />
       <FeaturedProducts />

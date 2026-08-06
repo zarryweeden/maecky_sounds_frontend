@@ -8,11 +8,6 @@
     --navbar-height:64px;
 }
 
-@media (max-width:768px){
-    :root{
-        --navbar-height:116px;
-    }
-}
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -188,8 +183,19 @@ body::before {
 }
 
 .page-wrapper {
-  padding-top: 64px;
+  padding-top: var(--navbar-height);
   flex: 1;
+  min-height: 100vh;
+}
+
+.page-wrapper--flush {
+  padding-top: 0;
+}
+
+.page-hero {
+  padding: 48px 0;
+  background: #F8F8FA;
+  border-bottom: 1px solid #E2E2E8;
 }
 
 .section {
@@ -412,144 +418,232 @@ body::before {
 }
 
 
-/* ---------------- Logo (legacy hooks, kept for compatibility) ---------------- */
-
-.navbar-logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-/* Desktop */
-.navbar-logo-text{
-    display:inline;
-    font-size:18px;
-}
-
-/* Tablet */
-@media (max-width:1100px){
-
-    .navbar-logo-text{
-        font-size:16px !important;
-    }
-
-}
-
-/* Smaller tablets */
-@media (max-width:900px){
-
-    .navbar-logo-text{
-        font-size:15px !important;
-    }
-
-}
-
-/* Phones */
-@media (max-width:768px){
-
-    .navbar-logo-text{
-        display:none !important;
-    }
-
-}
-
-
-.navbar-logo-mark{
-    width:32px;
-    height:32px;
-    transition:all .25s ease;
-}
-
-@media (max-width:768px){
-
-    .navbar-logo-mark{
-        width:36px;
-        height:36px;
-    }
-
-}
-
-
-.navbar-inner{
-    max-width:1280px;
-    width:100%;
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding-top:10px;
-    padding-bottom:12px;
-    gap:20px;
-}
-
-@media (max-width:768px){
-
-.navbar-inner{
-
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    gap:12px;
-
-}
-
-.navbar-search{
-
-    width:100%;
-    max-width:none;
-    margin-top:0;
-
-
-}
-
-}
-
 /* ══════════════════════════════════════════════════════════════════════════
-   MOBILE NAVBAR (< 768px)
-   The desktop navbar layout above is untouched. Everything below only
-   applies under the 768px breakpoint and targets the classes added to
-   Navbar.jsx: .navbar-top, .navbar-logo, .navbar-actions,
-   .navbar-search-mobile, .drawer-item / .drawer-icon.
+   NAVBAR
+   Height is measured by ResizeObserver in Navbar.jsx and written to
+   --navbar-height. All page offsets read from that variable.
    ══════════════════════════════════════════════════════════════════════════ */
-@media (max-width: 768px) {
 
-  /* Row 1: hamburger — logo — actions.
-     auto/1fr/auto lets the logo sit centered in the remaining space
-     without forcing the hamburger and action icons to match widths. */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-inner {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.navbar-top {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar-logo-img {
+  height: 42px;
+  width: auto;
+}
+
+.nav-logo-text {
+  display: inline;
+  white-space: nowrap;
+}
+
+.nav-search-desktop {
+  flex: 1;
+  max-width: 520px;
+  position: relative;
+  margin: 0 16px;
+}
+
+.nav-spacer-mobile-hide {
+  flex: 1;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.navbar-cart-btn {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav-search-mobile {
+  display: none;
+}
+
+.navbar-search-mobile {
+  padding: 8px 0 12px;
+}
+
+.navbar-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #fff;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.12);
+  z-index: 121;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.navbar-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 120;
+}
+
+/* Search box */
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+.search-box-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.search-box-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 48px 0 46px;
+  background: #F9F9F9;
+  border: 1px solid #E5E7EB;
+  border-radius: 999px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #111113;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.search-kbd-hint {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: #9090A0;
+  font-family: 'JetBrains Mono', monospace;
+  pointer-events: none;
+}
+
+/* Tablet logo sizing */
+@media (max-width: 900px) {
+  .nav-logo-text {
+    font-size: 16px !important;
+  }
+}
+
+/* Mobile navbar */
+@media (max-width: 768px) {
+  .navbar-inner {
+    padding: 0 16px;
+  }
+
+  .nav-search-desktop {
+    display: none;
+  }
+
+  .nav-search-mobile {
+    display: block;
+  }
+
+  .nav-spacer-mobile-hide {
+    display: none;
+  }
+
+  .nav-logo-text {
+    display: none;
+  }
+
+  .nav-account-btn {
+    display: none;
+  }
+
+  .cart-label {
+    display: none;
+  }
+
   .navbar-top {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     column-gap: 8px;
+    min-width: 0;
   }
 
   .navbar-logo {
     justify-self: center;
+    min-width: 0;
   }
 
-  .navbar-hamburger {
-    width: 36px;
-    height: 36px;
+  .navbar-logo-img {
+    height: clamp(32px, 9vw, 42px);
   }
 
-  /* Action icons: equal spacing, vertically centered, no wrap/overflow */
   .navbar-actions {
     justify-self: end;
-    display: flex;
-    align-items: center;
     gap: 6px;
     flex-wrap: nowrap;
   }
 
+  .navbar-hamburger,
   .navbar-icon-btn {
-    width: 34px;
-    height: 34px;
+    width: clamp(32px, 9vw, 36px);
+    height: clamp(32px, 9vw, 36px);
+    flex-shrink: 0;
   }
 
+  .navbar-hamburger svg,
   .navbar-icon-svg {
-    width: 20px;
-    height: 20px;
+    width: clamp(18px, 5.5vw, 22px);
+    height: clamp(18px, 5.5vw, 22px);
   }
 
   .navbar-badge {
@@ -558,30 +652,9 @@ body::before {
   }
 
   .navbar-cart-btn {
-    height: 34px;
-    padding: 0 10px;
+    height: clamp(32px, 9vw, 34px);
+    padding: 0 clamp(8px, 2.5vw, 10px);
     gap: 5px;
-    white-space: nowrap;
-  }
-
-  /* Row 2: search sits in its own tray, visually separated from the
-     top bar — a hairline seam + distinct fill instead of one fused block.
-     Bleeds full-width via negative margin to offset the container's own
-     16px mobile padding, then re-applies that padding internally. */
-  .navbar-search-mobile {
-    margin: 0 -16px;
-    padding: 8px 16px 10px;
-    background: #FAFAFA;
-    border-top: 1px solid rgba(17,17,19,0.06);
-  }
-
-  /* The pill itself floats above the tray with its own soft shadow,
-     reinforcing that it's a distinct element, not part of the bar.
-     !important scoped to this one selector to win over the SearchBox's
-     inline default (mobile has no hover state to set this via JS). */
-  .navbar-search-mobile input {
-    box-shadow: 0 2px 10px rgba(17,17,19,0.06) !important;
-    border-color: #ECECEF !important;
   }
 
   .navbar-search-mobile .search-kbd-hint {
@@ -589,23 +662,8 @@ body::before {
   }
 }
 
-/* ── PAGE OFFSET FOR THE TWO-ROW MOBILE NAVBAR ───────────────────────────────
-   Desktop navbar is a single 64px row, matching the base .page-wrapper
-   padding-top above. On mobile the navbar gains a second row (the search
-   tray), so content needs extra clearance or it renders underneath the
-   fixed nav. Row 1 is 64px; row 2 is 8px + 1px seam + 44px input + 10px
-   = 63px. */
-@media (max-width: 768px) {
-  .page-wrapper {
-    padding-top: 127px;
-  }
-}
-
 /* ══════════════════════════════════════════════════════════════════════════
-   DRAWER ITEM ALIGNMENT
-   Keeps existing colors/typography/spacing; only fixes column alignment
-   so icons line up in a fixed-width column and chevrons sit flush right
-   regardless of icon glyph width, and scales the drawer on narrow phones.
+   DRAWER
    ══════════════════════════════════════════════════════════════════════════ */
 .drawer-item {
   display: flex;
@@ -651,6 +709,216 @@ body::before {
   }
 }
 
-.hero-section{
-    padding-top:var(--navbar-height);
+/* ══════════════════════════════════════════════════════════════════════════
+   HERO
+   Full-viewport section that offsets itself via --navbar-height.
+   Used on the homepage where PageWrapper is flush (no double offset).
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: var(--navbar-height);
+  box-sizing: border-box;
+}
+
+.hero-section__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 70% 50%, rgba(232, 135, 26, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-section__grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 80, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 80, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+
+.hero-section__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-content {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-content--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: #E8871A;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-eyebrow__line {
+  width: 24px;
+  height: 1px;
+  background: #E8871A;
+  display: inline-block;
+}
+
+.hero-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 5.5vw, 76px);
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  color: #111113;
+  margin-bottom: 22px;
+}
+
+.hero-title__accent {
+  color: #E8871A;
+}
+
+.hero-description {
+  font-size: 17px;
+  color: #161616;
+  line-height: 1.75;
+  margin-bottom: 38px;
+  max-width: 440px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.hero-stat__num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 22px;
+  color: #E8871A;
+  line-height: 1;
+}
+
+.hero-stat__label {
+  font-size: 12px;
+  color: #161616;
+  margin-top: 4px;
+}
+
+.hero-image-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+.hero-image-wrap--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-image-wrap__glow {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(232, 135, 26, 0.18), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 500px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 24px 64px rgba(0, 0, 0, 0.85));
+  border-radius: 16px;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.4;
+  animation: fadeUp 1s ease 1.2s both;
+}
+
+.hero-scroll-indicator__label {
+  font-size: 11px;
+  color: #161616;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-scroll-indicator__line {
+  width: 1px;
+  height: 40px;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero-image-wrap {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section .hero-title,
+  .hero-section .hero-description {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
 }

@@ -1,16 +1,12 @@
 import React from 'react';
-import { C } from '../../styles/tokens';
 
-export default function PageWrapper({ children, style: extraStyle = {}, maxWidth = '1280px' }) {
+export default function PageWrapper({ children, flush = false, className = '' }) {
+  const classes = ['page-wrapper', flush && 'page-wrapper--flush', className]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <main
-      style={{
-        paddingTop: '64px',
-        minHeight: '100vh',
-        flex: 1,
-        ...extraStyle,
-      }}
-    >
+    <main className={classes}>
       {children}
     </main>
   );
@@ -18,12 +14,7 @@ export default function PageWrapper({ children, style: extraStyle = {}, maxWidth
 
 export function PageHero({ children, style: extraStyle = {} }) {
   return (
-    <div style={{
-      padding: '48px 0',
-      background: C.surface,
-      borderBottom: `1px solid ${C.border}`,
-      ...extraStyle,
-    }}>
+    <div className="page-hero" style={extraStyle}>
       <div className="container">
         {children}
       </div>
