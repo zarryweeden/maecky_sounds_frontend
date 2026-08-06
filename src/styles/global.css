@@ -400,7 +400,7 @@ body::before {
 }
 
 
-/* ---------------- Logo ---------------- */
+/* ---------------- Logo (legacy hooks, kept for compatibility) ---------------- */
 
 .navbar-logo{
     display:flex;
@@ -482,15 +482,6 @@ body::before {
 
 }
 
-.navbar-top{
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
-
-}
-
 .navbar-search{
 
     width:100%;
@@ -500,4 +491,134 @@ body::before {
 
 }
 
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOBILE NAVBAR (< 768px)
+   The desktop navbar layout above is untouched. Everything below only
+   applies under the 768px breakpoint and targets the classes added to
+   Navbar.jsx: .navbar-top, .navbar-logo, .navbar-actions,
+   .navbar-search-mobile, .drawer-item / .drawer-icon.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Row 1: hamburger — logo — actions.
+     auto/1fr/auto lets the logo sit centered in the remaining space
+     without forcing the hamburger and action icons to match widths. */
+  .navbar-top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  .navbar-logo {
+    justify-self: center;
+  }
+
+  .navbar-hamburger {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Action icons: equal spacing, vertically centered, no wrap/overflow */
+  .navbar-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+
+  .navbar-icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .navbar-icon-svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .navbar-badge {
+    top: 2px;
+    right: 2px;
+  }
+
+  .navbar-cart-btn {
+    height: 34px;
+    padding: 0 10px;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  /* Row 2: full-width search pill */
+  .navbar-search-mobile {
+    padding: 8px 0 12px;
+  }
+
+  .navbar-search-mobile .search-kbd-hint {
+    display: none;
+  }
+}
+
+/* ── PAGE OFFSET FOR THE TWO-ROW MOBILE NAVBAR ───────────────────────────────
+   Desktop navbar is a single 64px row, matching the base .page-wrapper
+   padding-top above. On mobile the navbar gains a second row (the search
+   bar), so content needs extra clearance or it renders underneath the
+   fixed nav. Row 1 stays 64px; row 2 is 8px + 44px input + 12px = 64px. */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding-top: 128px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DRAWER ITEM ALIGNMENT
+   Keeps existing colors/typography/spacing; only fixes column alignment
+   so icons line up in a fixed-width column and chevrons sit flush right
+   regardless of icon glyph width, and scales the drawer on narrow phones.
+   ══════════════════════════════════════════════════════════════════════════ */
+.drawer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 22px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.drawer-item:hover {
+  background: #FFF8F0;
+}
+
+.drawer-item-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.drawer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.drawer-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drawer-chevron {
+  flex-shrink: 0;
+}
+
+@media (max-width: 360px) {
+  .navbar-drawer {
+    width: 88vw !important;
+  }
 }

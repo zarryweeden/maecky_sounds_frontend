@@ -56,22 +56,17 @@ export default function Navbar() {
   const MenuItem = ({ icon, label, to }) => (
     <Link
       to={to}
+      className="drawer-item"
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '15px 22px',
-        textDecoration: 'none',
         color: location.pathname === to ? C.amber : C.text,
-        transition: '.2s',
         borderBottom: `1px solid ${C.border}`,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        {icon}
-        <span>{label}</span>
+      <div className="drawer-item-left">
+        <span className="drawer-icon">{icon}</span>
+        <span className="drawer-label">{label}</span>
       </div>
-      <ChevronRight size={16} color={C.textMid} />
+      <ChevronRight size={16} color={C.textMid} className="drawer-chevron" />
     </Link>
   );
 
@@ -119,6 +114,7 @@ export default function Navbar() {
 
           {/* ── ROW 1: hamburger · logo · actions ─────────────── */}
           <div
+            className="navbar-top"
             style={{
               height: '64px',
               display: 'flex',
@@ -130,6 +126,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen(v => !v)}
               aria-label="Open menu"
+              className="navbar-hamburger"
               style={{
                 ...iconBtnStyle,
                 flexShrink: 0,
@@ -146,6 +143,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link
               to="/"
+              className="navbar-logo"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -190,21 +188,22 @@ export default function Navbar() {
             <div style={{ flex: 1 }} className="nav-spacer-mobile-hide" />
 
             {/* Actions */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+            <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
 
               {/* Wishlist */}
               <button
                 style={iconBtnStyle}
+                className="navbar-icon-btn"
                 onClick={() => navigate('/wishlist')}
                 aria-label={`Wishlist (${wishCount} items)`}
                 onMouseEnter={e => { e.currentTarget.style.background = C.amberLo; e.currentTarget.style.color = C.amber; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
               >
-                <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                <svg className="navbar-icon-svg" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
                 </svg>
                 {wishCount > 0 && (
-                  <span style={{
+                  <span className="navbar-badge" style={{
                     position: 'absolute', top: '4px', right: '4px',
                     width: '16px', height: '16px',
                     background: C.amber, color: '#000',
@@ -247,6 +246,7 @@ export default function Navbar() {
               <button
                 onClick={openCart}
                 aria-label={`Cart (${itemCount} items)`}
+                className="navbar-cart-btn"
                 style={{
                   background: C.amber,
                   color: '#000',
@@ -263,11 +263,12 @@ export default function Navbar() {
                   gap: '8px',
                   transition: TRANSITION.fast,
                   flexShrink: 0,
+                  whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = C.amberHi}
                 onMouseLeave={e => e.currentTarget.style.background = C.amber}
               >
-                <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <svg className="navbar-icon-svg" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 01-8 0" />
@@ -290,7 +291,7 @@ export default function Navbar() {
           </div>
 
           {/* ── ROW 2: search — mobile only ───────────────────── */}
-          <div className="nav-search-mobile" style={{ paddingBottom: '12px' }}>
+          <div className="nav-search-mobile navbar-search-mobile">
             <SearchBox openSearch={openSearch} />
           </div>
 
@@ -299,6 +300,7 @@ export default function Navbar() {
 
       {/* ── SLIDE-IN DRAWER ───────────────────────────────────── */}
       <aside
+        className="navbar-drawer"
         style={{
           position: 'fixed',
           top: 0, left: 0,
@@ -459,10 +461,52 @@ export default function Navbar() {
 
           /* Container padding */
           nav > div { padding: 0 16px !important; }
-        }
 
-        @media (max-width: 480px) {
-          .cart-label { display: none !important; }
+          /* ── Row 1: hamburger | logo (centered) | actions ── */
+          .navbar-top {
+            display: grid !important;
+            grid-template-columns: 40px 1fr auto;
+            column-gap: 8px;
+          }
+
+          .navbar-hamburger {
+            width: 36px !important;
+            height: 36px !important;
+          }
+
+          .navbar-logo {
+            justify-self: center;
+          }
+
+          .navbar-actions {
+            justify-self: end;
+            gap: 6px !important;
+          }
+
+          .navbar-icon-btn {
+            width: 34px !important;
+            height: 34px !important;
+          }
+
+          .navbar-icon-svg {
+            width: 20px !important;
+            height: 20px !important;
+          }
+
+          .navbar-cart-btn {
+            height: 34px !important;
+            padding: 0 10px !important;
+            gap: 5px !important;
+          }
+
+          /* ── Row 2: full-width mobile search ── */
+          .navbar-search-mobile {
+            padding: 8px 0 12px;
+          }
+
+          .navbar-search-mobile .search-kbd-hint {
+            display: none !important;
+          }
         }
       `}</style>
     </>
@@ -517,7 +561,7 @@ function SearchBox({ openSearch }) {
           e.target.style.boxShadow = 'none';
         }}
       />
-      <kbd style={{
+      <kbd className="search-kbd-hint" style={{
         position: 'absolute', right: '14px',
         top: '50%', transform: 'translateY(-50%)',
         background: '#fff', border: '1px solid #E5E7EB',
@@ -544,32 +588,5 @@ function SectionLabel({ children }) {
     }}>
       {children}
     </div>
-  );
-}
-
-function MenuItem({ icon, label, to, location }) {
-  return (
-    <Link
-      to={to}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '15px 22px',
-        textDecoration: 'none',
-        color: location.pathname === to ? '#E8871A' : '#111113',
-        borderBottom: '1px solid #E2E2E8',
-        transition: 'background 0.15s',
-        fontSize: 15,
-      }}
-      onMouseEnter={e => e.currentTarget.style.background = '#FFF8F0'}
-      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        {icon}
-        <span>{label}</span>
-      </div>
-      <ChevronRight size={16} color="#9090A0" />
-    </Link>
   );
 }
