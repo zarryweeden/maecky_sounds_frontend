@@ -6,7 +6,6 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useUIContext } from '../../context/UIContext';
 import { C, FONTS, Z, TRANSITION } from '../../styles/tokens';
 import {
-  Home,
   Guitar,
   Piano,
   Mic2,
@@ -15,31 +14,10 @@ import {
   BadgePercent,
   Heart,
   ShoppingCart,
-  User,
-  Truck,
-  RotateCcw,
-  CircleHelp,
   Phone,
   Info,
   ChevronRight,
 } from "lucide-react";
-
-function LogoMark({ className = '' }) {
-  return (
-    <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <rect width="32" height="32" rx="8" fill={C.amber} fillOpacity="0.15" />
-      <path
-        d="M8 22V10l8 4 8-4v12"
-        stroke={C.amber}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="8" cy="22" r="2.5" fill={C.amber} />
-      <circle cx="24" cy="22" r="2.5" fill={C.amber} />
-    </svg>
-  );
-}
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -69,69 +47,41 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
-    return () => {
-        document.body.style.overflow = "";
-    };
-}, [mobileOpen]);
-
-  const navStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    minHeight: '64px',
-    zIndex: Z.nav,
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 32px',
-    transition: 'all 0.3s ease',
-    background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
-    backdropFilter: 'blur(16px)',
-    borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
-    boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
-  };
-const MenuItem = ({ icon, label, to }) => (
-  <Link
-    to={to}
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      padding: "15px 22px",
-      textDecoration: "none",
-      color: location.pathname === to ? C.amber : C.text,
-      transition: ".2s",
-      borderBottom: `1px solid ${C.border}`,
-    }}
-  >
-    <div
+  const MenuItem = ({ icon, label, to }) => (
+    <Link
+      to={to}
       style={{
-        display: "flex",
-        alignItems: "center",
-        gap: '14px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '15px 22px',
+        textDecoration: 'none',
+        color: location.pathname === to ? C.amber : C.text,
+        transition: '.2s',
+        borderBottom: `1px solid ${C.border}`,
       }}
     >
-      {icon}
-      <span>{label}</span>
-    </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {icon}
+        <span>{label}</span>
+      </div>
+      <ChevronRight size={16} color={C.textMid} />
+    </Link>
+  );
 
-    <ChevronRight
-      size={16}
-      color={C.textMid}
-    />
-  </Link>
-);
-
-  const iconBtnStyle = (active = false) => ({
+  const iconBtnStyle = {
     width: '38px',
     height: '38px',
     borderRadius: '8px',
     border: 'none',
-    background: active ? C.amberLo : 'transparent',
-    color: active ? C.amber : C.textMid,
+    background: 'transparent',
+    color: C.textMid,
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
@@ -139,427 +89,487 @@ const MenuItem = ({ icon, label, to }) => (
     transition: TRANSITION.fast,
     position: 'relative',
     flexShrink: 0,
-  });
+  };
 
   return (
     <>
-<nav style={navStyle} aria-label="Main navigation">
+      {/* ── NAV SHELL ─────────────────────────────────────────── */}
+      <nav
+        aria-label="Main navigation"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: Z.nav,
+          background: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.92)',
+          backdropFilter: 'blur(16px)',
+          borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
+          boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
+          transition: 'all 0.3s ease',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '1280px',
+            margin: '0 auto',
+            padding: '0 24px',
+          }}
+        >
 
-<div className="navbar-inner">
-
-    <div className="navbar-top">
-
-        <div className="navbar-brand">
-
+          {/* ── ROW 1: hamburger · logo · actions ─────────────── */}
+          <div
+            style={{
+              height: '64px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+            }}
+          >
+            {/* Hamburger — always visible */}
             <button
-                className="desktop-hamburger"
-                onClick={() => setMobileOpen(v => !v)}
+              onClick={() => setMobileOpen(v => !v)}
+              aria-label="Open menu"
+              style={{
+                ...iconBtnStyle,
+                flexShrink: 0,
+                color: C.text,
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = C.amberLo}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
-                <svg
-                    width="28"
-                    height="28"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M3 6h18"/>
-                    <path d="M3 12h18"/>
-                    <path d="M3 18h18"/>
-                </svg>
+              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
             </button>
 
-            <Link to="/" className="navbar-logo">
-
-                <img
-                    src="/logo-transparent.png"
-                    alt="Maecky Sounds"
-                    className="navbar-logo-image"
-                />
-
-                <span className="navbar-logo-text">
-                    Maecky <span style={{color:C.amber}}>Sounds</span>
-                </span>
-
+            {/* Logo */}
+            <Link
+              to="/"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                textDecoration: 'none',
+                flexShrink: 0,
+                gap: '8px',
+              }}
+            >
+              <img
+                src="/logo-transparent.png"
+                alt="Maecky Sounds"
+                style={{ height: '42px', width: 'auto' }}
+              />
+              <span
+                className="nav-logo-text"
+                style={{
+                  fontFamily: FONTS.display,
+                  fontWeight: 800,
+                  fontSize: '20px',
+                  color: C.text,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Maecky <span style={{ color: C.amber }}>Sounds</span>
+              </span>
             </Link>
 
-        </div>
-
-        <div className="navbar-actions">
-
-            {/* Wishlist */}
-
-            <button
-                style={iconBtnStyle()}
-                onClick={()=>navigate("/wishlist")}
+            {/* Search — desktop only (hidden on mobile via CSS) */}
+            <div
+              className="nav-search-desktop"
+              style={{
+                flex: 1,
+                maxWidth: '520px',
+                position: 'relative',
+                margin: '0 16px',
+              }}
             >
+              <SearchBox openSearch={openSearch} />
+            </div>
 
-                <svg
-                    width="22"
-                    height="22"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            {/* Spacer pushes actions to the right on desktop */}
+            <div style={{ flex: 1 }} className="nav-spacer-mobile-hide" />
+
+            {/* Actions */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+
+              {/* Wishlist */}
+              <button
+                style={iconBtnStyle}
+                onClick={() => navigate('/wishlist')}
+                aria-label={`Wishlist (${wishCount} items)`}
+                onMouseEnter={e => { e.currentTarget.style.background = C.amberLo; e.currentTarget.style.color = C.amber; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
+              >
+                <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
                 </svg>
-
-                {wishCount>0 &&
-                    <span className="navbar-badge">
-                        {wishCount>9?"9+":wishCount}
-                    </span>
-                }
-
-            </button>
-
-            {/* Account */}
-
-            <button
-                style={iconBtnStyle()}
-                onClick={()=>navigate(isAuthenticated?"/account":"/login")}
-            >
-
-                {isAuthenticated && user ? (
-
-                    <div className="navbar-avatar">
-                        {user.name?.[0]?.toUpperCase() || "U"}
-                    </div>
-
-                ) : (
-
-                    <svg
-                        width="22"
-                        height="22"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-
+                {wishCount > 0 && (
+                  <span style={{
+                    position: 'absolute', top: '4px', right: '4px',
+                    width: '16px', height: '16px',
+                    background: C.amber, color: '#000',
+                    fontSize: '10px', fontWeight: 700,
+                    borderRadius: '50%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    {wishCount > 9 ? '9+' : wishCount}
+                  </span>
                 )}
+              </button>
 
-            </button>
+              {/* Account — desktop only */}
+              <button
+                className="nav-account-btn"
+                style={iconBtnStyle}
+                onClick={() => navigate(isAuthenticated ? '/account' : '/login')}
+                aria-label={isAuthenticated ? 'My account' : 'Sign in'}
+                onMouseEnter={e => { e.currentTarget.style.background = C.amberLo; e.currentTarget.style.color = C.amber; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.textMid; }}
+              >
+                {isAuthenticated && user ? (
+                  <div style={{
+                    width: '28px', height: '28px', borderRadius: '50%',
+                    background: C.amberLo, border: `1.5px solid rgba(232,135,26,0.4)`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontFamily: FONTS.display, fontWeight: 700, fontSize: '11px', color: C.amber,
+                  }}>
+                    {(user.full_name || user.name)?.[0]?.toUpperCase() || 'U'}
+                  </div>
+                ) : (
+                  <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                )}
+              </button>
 
-            {/* Cart */}
-
-            <button
-                className="navbar-cart-btn"
+              {/* Cart */}
+              <button
                 onClick={openCart}
-            >
-
-                <svg
-                    width="17"
-                    height="17"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 01-8 0"/>
+                aria-label={`Cart (${itemCount} items)`}
+                style={{
+                  background: C.amber,
+                  color: '#000',
+                  height: '42px',
+                  padding: '0 18px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  fontFamily: FONTS.body,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: TRANSITION.fast,
+                  flexShrink: 0,
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = C.amberHi}
+                onMouseLeave={e => e.currentTarget.style.background = C.amber}
+              >
+                <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 01-8 0" />
                 </svg>
+                {/* Hide "Cart" text on small screens */}
+                <span className="cart-label">Cart</span>
+                {itemCount > 0 && (
+                  <span style={{
+                    background: 'rgba(0,0,0,0.22)',
+                    borderRadius: '99px',
+                    padding: '1px 7px',
+                    fontSize: '12px',
+                    fontWeight: 800,
+                  }}>
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
 
-                <span className="cart-text">
-                    Cart
-                </span>
-
-                {itemCount>0 &&
-                    <span className="cart-count">
-                        {itemCount}
-                    </span>
-                }
-
-            </button>
+          {/* ── ROW 2: search — mobile only ───────────────────── */}
+          <div className="nav-search-mobile" style={{ paddingBottom: '12px' }}>
+            <SearchBox openSearch={openSearch} />
+          </div>
 
         </div>
+      </nav>
 
-    </div>
+      {/* ── SLIDE-IN DRAWER ───────────────────────────────────── */}
+      <aside
+        style={{
+          position: 'fixed',
+          top: 0, left: 0,
+          width: '320px',
+          maxWidth: '90vw',
+          height: '100vh',
+          background: '#fff',
+          transform: mobileOpen ? 'translateX(0)' : 'translateX(-100%)',
+          transition: 'transform 0.35s cubic-bezier(0.22,1,0.36,1)',
+          boxShadow: '8px 0 30px rgba(0,0,0,0.12)',
+          zIndex: Z.nav + 21,
+          display: 'flex',
+          flexDirection: 'column',
+          overflowY: 'auto',
+        }}
+      >
+        {/* Drawer header */}
+        <div style={{
+          height: 72,
+          padding: '0 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderBottom: `1px solid ${C.border}`,
+          flexShrink: 0,
+        }}>
+          <div>
+            <div style={{ fontFamily: FONTS.display, fontWeight: 800, fontSize: 20, color: C.text }}>
+              Maecky Sounds
+            </div>
+            <div style={{ color: C.textMid, fontSize: 13 }}>A Complete Tune</div>
+          </div>
+          <button
+            onClick={() => setMobileOpen(false)}
+            aria-label="Close menu"
+            style={{
+              width: 40, height: 40,
+              borderRadius: 8,
+              border: `1px solid ${C.border}`,
+              background: 'transparent',
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: C.text, fontSize: 18,
+            }}
+          >
+            ✕
+          </button>
+        </div>
 
-    <div className="navbar-search">
+        {/* Account row */}
+        <div style={{ padding: 20, borderBottom: `1px solid ${C.border}` }}>
+          <div style={{ fontWeight: 700, marginBottom: 8, color: C.text, fontSize: 15 }}>
+            {isAuthenticated ? `Hello, ${user?.full_name || user?.name || 'there'}` : 'Welcome'}
+          </div>
+          <button
+            onClick={() => { navigate(isAuthenticated ? '/account' : '/login'); setMobileOpen(false); }}
+            style={{
+              background: C.amber, color: '#000',
+              border: 'none', borderRadius: 8,
+              padding: '10px 18px',
+              fontWeight: 700, fontSize: 14,
+              fontFamily: FONTS.body,
+              cursor: 'pointer',
+            }}
+          >
+            {isAuthenticated ? 'My Account' : 'Sign In'}
+          </button>
+        </div>
 
-        <input
-            readOnly
-            onClick={openSearch}
-            placeholder="Search instruments, gear & accessories"
-            className="navbar-search-input"
-        />
+        {/* Shop links */}
+        <div style={{ paddingTop: 18 }}>
+          <SectionLabel>SHOP</SectionLabel>
+          <MenuItem icon={<Guitar size={20} />} label="Guitars" to="/category/guitars" location={location} />
+          <MenuItem icon={<Piano size={20} />} label="Keyboards & Pianos" to="/category/keyboards-pianos" location={location} />
+          <MenuItem icon={<Mic2 size={20} />} label="Studio & Recording" to="/category/studio-recording" location={location} />
+          <MenuItem icon={<Headphones size={20} />} label="DJ Equipment" to="/category/dj-equipment" location={location} />
+          <MenuItem icon={<Package size={20} />} label="Accessories" to="/category/accessories" location={location} />
+        </div>
 
-        <kbd className="navbar-search-shortcut">
-            /
-        </kbd>
+        {/* Discover */}
+        <div style={{ paddingTop: 20 }}>
+          <SectionLabel>DISCOVER</SectionLabel>
+          <MenuItem icon={<BadgePercent size={20} />} label="Deals" to="/category/guitars" location={location} />
+          <MenuItem icon={<Heart size={20} />} label="Wishlist" to="/wishlist" location={location} />
+          <MenuItem icon={<ShoppingCart size={20} />} label="Cart" to="/cart" location={location} />
+        </div>
 
-    </div>
+        {/* Info */}
+        <div style={{ paddingTop: 20 }}>
+          <SectionLabel>INFORMATION</SectionLabel>
+          <MenuItem icon={<Phone size={20} />} label="Contact Us" to="/contact" location={location} />
+          <MenuItem icon={<Info size={20} />} label="About Maecky Sounds" to="/about" location={location} />
+        </div>
 
-</div>
+        {/* Footer */}
+        <div style={{
+          marginTop: 'auto',
+          padding: 20,
+          fontSize: 12,
+          color: C.textMid,
+          borderTop: `1px solid ${C.border}`,
+          lineHeight: 1.8,
+        }}>
+          © 2026 Maecky Sounds<br />Your Complete Tune
+        </div>
+      </aside>
 
-</nav>
-
-      {/* Mobile Menu */}
-<aside 
+      {/* Backdrop */}
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
           style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "320px",
-            maxWidth: "90vw",
-            height: "100vh",
-            background: "#fff",
-            transform: mobileOpen
-              ? "translateX(0)"
-              : "translateX(-100%)",
-
-            transition: "transform .35s ease",
-            willChange: "transform",
-            transition: "transform .35s ease",
-            boxShadow: "8px 0 30px rgba(0,0,0,.15)",
-            zIndex: Z.nav + 21,
-            display: "flex",
-            flexDirection: "column",
-            overflowY: "auto",
+            position: 'fixed', inset: 0,
+            background: 'rgba(0,0,0,0.35)',
+            zIndex: Z.nav + 20,
           }}
+        />
+      )}
 
->
-  {/* Header */}
-<div
-  style={{
-    height: 72,
-    padding: "0 20px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderBottom: `1px solid ${C.border}`,
-    flexShrink: 0,
-  }}
->
-  <div>
-    <div
-      style={{
-        fontFamily: FONTS.display,
-        fontWeight: 800,
-        fontSize: 20,
-      }}
-    >
-      Maecky Sounds
-    </div>
-
-    <div
-      style={{
-        color: C.textMid,
-        fontSize: 13,
-      }}
-    >
-      Complete Tune
-    </div>
-  </div>
-
-  <button
-    onClick={() => setMobileOpen(false)}
-    style={{
-      width: 40,
-      height: 40,
-      borderRadius: 8,
-      border: "none",
-      background: "transparent",
-      cursor: "pointer",
-    }}
-  >
-    ✕
-  </button>
-</div>
-
-{/* Account */}
-<div
-  style={{
-    padding: 20,
-    borderBottom: `1px solid ${C.border}`,
-  }}
->
-  <div
-    style={{
-      fontWeight: 700,
-      marginBottom: 6,
-    }}
-  >
-    {isAuthenticated ? `Hello, ${user.name}` : "Welcome"}
-  </div>
-
-  <button
-    onClick={() =>
-      navigate(isAuthenticated ? "/account" : "/login")
-    }
-    style={{
-      background: C.amber,
-      color: "#000",
-      border: "none",
-      borderRadius: 8,
-      padding: "10px 18px",
-      fontWeight: 700,
-      cursor: "pointer",
-    }}
-  >
-    {isAuthenticated ? "My Account" : "Sign In"}
-  </button>
-</div>
-
-<div style={{ paddingTop: 18 }}>
-
-<div
-style={{
-padding:"0 22px 10px",
-fontSize:12,
-fontWeight:700,
-letterSpacing:1,
-color:C.textMid
-}}
->
-SHOP
-</div>
-
-<MenuItem
-icon={<Guitar size={20}/>}
-label="Guitars"
-to="/category/guitars"
-/>
-
-<MenuItem
-icon={<Piano size={20}/>}
-label="Keyboards"
-to="/category/keyboards"
-/>
-
-<MenuItem
-icon={<Mic2 size={20}/>}
-label="Microphones"
-to="/category/microphones"
-/>
-
-<MenuItem
-icon={<Headphones size={20}/>}
-label="Studio Equipment"
-to="/category/studio"
-/>
-
-<MenuItem
-icon={<Package size={20}/>}
-label="Accessories"
-to="/category/accessories"
-/>
-
-</div>
-
-<div style={{ paddingTop:20 }}>
-
-<div
-style={{
-padding:"0 22px 10px",
-fontSize:12,
-fontWeight:700,
-letterSpacing:1,
-color:C.textMid
-}}
->
-DISCOVER
-</div>
-
-<MenuItem
-icon={<BadgePercent size={20}/>}
-label="Deals"
-to="/deals"
-/>
-
-<MenuItem
-icon={<Heart size={20}/>}
-label="Wishlist"
-to="/wishlist"
-/>
-
-<MenuItem
-icon={<ShoppingCart size={20}/>}
-label="Cart"
-to="/cart"
-/>
-
-</div>
-<div style={{ paddingTop:20 }}>
-
-<div
-style={{
-padding:"0 22px 10px",
-fontSize:12,
-fontWeight:700,
-letterSpacing:1,
-color:C.textMid
-}}
->
-INFORMATION
-</div>
-
-
-<MenuItem
-icon={<Phone size={20}/>}
-label="Contact Us"
-to="/contact"
-/>
-
-<MenuItem
-icon={<Info size={20}/>}
-label="About Maecky Sounds"
-to="/about"
-/>
-
-</div>
-
-<div
-style={{
-marginTop:"auto",
-padding:20,
-fontSize:12,
-color:C.textMid,
-borderTop:`1px solid ${C.border}`,
-}}
->
-© 2026 Maecky Sounds
-<br/>
-Your Complete Tune
-</div>
-
-</aside>
-      
-{mobileOpen && (
-  <div
-    onClick={() => setMobileOpen(false)}
-    style={{
-      position: "fixed",
-      inset: 0,
-      background: "rgba(0,0,0,.35)",
-      zIndex: Z.nav + 20,
-    }}
-  />
-)}
+      {/* ── RESPONSIVE STYLES ─────────────────────────────────── */}
       <style>{`
-        @media (max-width:768px){
+        /* Desktop: show search in row 1, hide row 2 search */
+        .nav-search-desktop { display: block; }
+        .nav-search-mobile  { display: none;  }
+        .nav-spacer-mobile-hide { display: flex; }
 
-          .navbar-top{
-              display:flex;
-              align-items:center;
-          }
+        /* Desktop: show account button */
+        .nav-account-btn { display: flex; }
 
-          .navbar-search{
-              order:2;
-              width:100%;
-              max-width:none;
-              margin-top:12px;
-          }
+        /* Desktop: show logo text */
+        .nav-logo-text { display: inline; }
 
-      }
-  
+        /* Desktop: show cart label */
+        .cart-label { display: inline; }
+
+        /* ── Tablet ── */
+        @media (max-width: 900px) {
+          .nav-logo-text { font-size: 16px !important; }
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+          /* Move search to row 2 */
+          .nav-search-desktop { display: none !important; }
+          .nav-search-mobile  { display: block !important; }
+
+          /* Remove spacer so actions sit right after logo */
+          .nav-spacer-mobile-hide { display: none !important; }
+
+          /* Hide logo text on small phones */
+          .nav-logo-text { display: none !important; }
+
+          /* Hide account icon — accessed via drawer */
+          .nav-account-btn { display: none !important; }
+
+          /* Hide cart text label */
+          .cart-label { display: none !important; }
+
+          /* Container padding */
+          nav > div { padding: 0 16px !important; }
+        }
+
+        @media (max-width: 480px) {
+          .cart-label { display: none !important; }
+        }
       `}</style>
     </>
+  );
+}
+
+/* ── Shared sub-components ──────────────────────────────────────────────── */
+
+function SearchBox({ openSearch }) {
+  return (
+    <div style={{ position: 'relative', width: '100%' }}>
+      <svg
+        width="18" height="18"
+        fill="none" stroke="#9090A0" strokeWidth="2"
+        viewBox="0 0 24 24"
+        style={{
+          position: 'absolute', left: '16px',
+          top: '50%', transform: 'translateY(-50%)',
+          pointerEvents: 'none', zIndex: 2,
+        }}
+      >
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+      <input
+        readOnly
+        onClick={openSearch}
+        placeholder="Search instruments, gear & accessories"
+        style={{
+          width: '100%',
+          height: '44px',
+          padding: '0 48px 0 46px',
+          background: '#F9F9F9',
+          border: '1px solid #E5E7EB',
+          borderRadius: '999px',
+          fontSize: '14px',
+          fontFamily: 'Inter, sans-serif',
+          color: '#111113',
+          outline: 'none',
+          cursor: 'pointer',
+          boxSizing: 'border-box',
+          transition: 'all 0.2s ease',
+        }}
+        onMouseEnter={e => {
+          e.target.style.background = '#fff';
+          e.target.style.borderColor = '#E8871A';
+          e.target.style.boxShadow = '0 4px 16px rgba(232,135,26,0.12)';
+        }}
+        onMouseLeave={e => {
+          e.target.style.background = '#F9F9F9';
+          e.target.style.borderColor = '#E5E7EB';
+          e.target.style.boxShadow = 'none';
+        }}
+      />
+      <kbd style={{
+        position: 'absolute', right: '14px',
+        top: '50%', transform: 'translateY(-50%)',
+        background: '#fff', border: '1px solid #E5E7EB',
+        borderRadius: '6px', padding: '2px 8px',
+        fontSize: '11px', color: '#9090A0',
+        fontFamily: 'JetBrains Mono, monospace',
+        pointerEvents: 'none',
+      }}>
+        /
+      </kbd>
+    </div>
+  );
+}
+
+function SectionLabel({ children }) {
+  return (
+    <div style={{
+      padding: '0 22px 10px',
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: 1.2,
+      color: '#9090A0',
+      fontFamily: 'Inter, sans-serif',
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function MenuItem({ icon, label, to, location }) {
+  return (
+    <Link
+      to={to}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '15px 22px',
+        textDecoration: 'none',
+        color: location.pathname === to ? '#E8871A' : '#111113',
+        borderBottom: '1px solid #E2E2E8',
+        transition: 'background 0.15s',
+        fontSize: 15,
+      }}
+      onMouseEnter={e => e.currentTarget.style.background = '#FFF8F0'}
+      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {icon}
+        <span>{label}</span>
+      </div>
+      <ChevronRight size={16} color="#9090A0" />
+    </Link>
   );
 }
