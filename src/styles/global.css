@@ -552,9 +552,24 @@ body::before {
     white-space: nowrap;
   }
 
-  /* Row 2: full-width search pill */
+  /* Row 2: search sits in its own tray, visually separated from the
+     top bar — a hairline seam + distinct fill instead of one fused block.
+     Bleeds full-width via negative margin to offset the container's own
+     16px mobile padding, then re-applies that padding internally. */
   .navbar-search-mobile {
-    padding: 8px 0 12px;
+    margin: 0 -16px;
+    padding: 8px 16px 10px;
+    background: #FAFAFA;
+    border-top: 1px solid rgba(17,17,19,0.06);
+  }
+
+  /* The pill itself floats above the tray with its own soft shadow,
+     reinforcing that it's a distinct element, not part of the bar.
+     !important scoped to this one selector to win over the SearchBox's
+     inline default (mobile has no hover state to set this via JS). */
+  .navbar-search-mobile input {
+    box-shadow: 0 2px 10px rgba(17,17,19,0.06) !important;
+    border-color: #ECECEF !important;
   }
 
   .navbar-search-mobile .search-kbd-hint {
@@ -565,11 +580,12 @@ body::before {
 /* ── PAGE OFFSET FOR THE TWO-ROW MOBILE NAVBAR ───────────────────────────────
    Desktop navbar is a single 64px row, matching the base .page-wrapper
    padding-top above. On mobile the navbar gains a second row (the search
-   bar), so content needs extra clearance or it renders underneath the
-   fixed nav. Row 1 stays 64px; row 2 is 8px + 44px input + 12px = 64px. */
+   tray), so content needs extra clearance or it renders underneath the
+   fixed nav. Row 1 is 64px; row 2 is 8px + 1px seam + 44px input + 10px
+   = 63px. */
 @media (max-width: 768px) {
   .page-wrapper {
-    padding-top: 128px;
+    padding-top: 127px;
   }
 }
 
